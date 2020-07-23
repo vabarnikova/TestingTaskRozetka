@@ -4,7 +4,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,7 +12,6 @@ import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 public class RozetkaMainPage {
@@ -26,44 +24,53 @@ public class RozetkaMainPage {
         this.driver = driver;
         waits = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
     }
+
     @FindBy(how = How.NAME, using = "search")
     private WebElement inpSearch;
 
-    @FindBy(how = How.NAME, using = "//a[@class='goods-tile__heading']/span")
+    @FindBy(how = How.XPATH, using = "//a[@class='goods-tile__heading']/span")
     private List<WebElement> listOfgoods;
 
-    @FindBy(how = How.NAME, using = "//a[contains(@class, 'header-topline__user-link')]")
+    @FindBy(how = How.XPATH, using = "//a[contains(@class, 'header-topline__user-link')]")
     private WebElement userLink;
 
+    @FindBy(how = How.XPATH, using = "//h1[@class='portal__heading']")
+    private WebElement heading;
 
-    /////////////////////////// smth strange
-    @FindBy(how = How.NAME, using = "//li[@class='menu-categories__item'][13]")
+
+
+    @FindBy(how = How.XPATH, using = "//ul[contains(@class,'menu-categories_type_main')]//a[contains(@href, 'alkoholnie')]")
     private WebElement item;
-    ///////////////////////////
-    public Alcohol getPageAlcohol(){
+
+    public Alcohol getPageAlcohol() {
         item.click();
         return new Alcohol(driver);
     }
 
 
-    public void verifyRozetkaSearch(String searchWord){
+
+    public RozetkaMainPage verifyRozetkaSearch(String searchWord) {
         inpSearch.click();
         inpSearch.sendKeys(searchWord);
         inpSearch.sendKeys(Keys.ENTER);
+        return this;
     }
 
-
-    public void checkingList(String formatName) {
+    public RozetkaMainPage checkingListOfItems(String formatWord) {
+        int i = 0;
         List<String> currentResult = new ArrayList<String>();
-        waits.until(ExpectedConditions.visibilityOfAllElements(listOfgoods));
         List<WebElement> actualResult = listOfgoods;
+        waits.until(ExpectedConditions.visibilityOfAllElements(listOfgoods));
         for (WebElement listOfFormat : actualResult) {
             currentResult.add(listOfFormat.getText());
-            Assert.assertTrue(currentResult.contains(formatName));
+            System.out.println(currentResult);
+            Assert.assertTrue(currentResult.get(i).contains(formatWord));
+            i++;
         }
+        return this;
     }
 
-    public SignIn goTo(){
+    public SignIn goToSignIn() {
         userLink.click();
         return new SignIn(driver);
     }

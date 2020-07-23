@@ -1,5 +1,6 @@
 package pages;
 
+import org.testng.Assert;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 public class SignUp {
     protected WebDriver driver;
@@ -35,11 +37,43 @@ public class SignUp {
     @FindBy(how = How.XPATH, using = "//button[contains(@class,'auth-modal__register-link')]")
     private WebElement alreadyRegistered;
 
+    @FindBy(how = How.XPATH, using = "//p[@class='validation-message']")
+    private WebElement errorName;
+
+
+
     public SignIn alredyRegisteredButton(){
         alreadyRegistered.click();
         return new SignIn(driver);
     }
 
+    public SignUp inputUserName(String name){
+        userName.sendKeys(name);
+        return this;
+    }
+    public SignUp inputUserEmail(String email){
+        userEmail.sendKeys(email);
+        return this;
+    }
+    public SignUp inputUserPswd(String pswd){
+        userPassword.sendKeys(pswd);
+        return this;
+    }
+
+    public SignUp failRegistration(String name, String email, String password){
+        this.inputUserName(name);
+        this.inputUserEmail(email);
+        this.inputUserPswd(password);
+        registration.click();
+        return this;
+    }
+
+    public SignUp errorMessage(String error){
+        String msg = errorName.getText();
+        System.out.println(msg);
+        Assert.assertEquals(msg, error);
+        return this;
+    }
 
 
 }
