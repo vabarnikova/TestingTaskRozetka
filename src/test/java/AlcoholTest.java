@@ -10,6 +10,7 @@ public class AlcoholTest extends WebDriverSettings {
 
     @BeforeClass
     public void init() {
+        driver.get("https://rozetka.com.ua/alkoholnie-napitki-i-produkty/c4626923/");
         alcoholPage = new AlcoholPage(driver);
     }
 

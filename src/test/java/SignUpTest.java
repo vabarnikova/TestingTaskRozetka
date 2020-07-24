@@ -1,4 +1,3 @@
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import core.WebDriverSettings;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
