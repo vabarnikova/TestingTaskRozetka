@@ -12,11 +12,12 @@ import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CoffeePage {
+public class CoffeePage extends ProductPage{
     protected WebDriver driver;
     private final Wait<WebDriver> waits;
 
     public CoffeePage(WebDriver driver) {
+        super(driver);
         PageFactory.initElements(driver, this);
         this.driver = driver;
         waits = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
@@ -30,30 +31,17 @@ public class CoffeePage {
     @FindBy(how = How.XPATH, using = "//input[@id='Ambassador']/following-sibling::label")
     private WebElement checkboxAmbassador;
 
-    public CoffeePage checkingTitleCoffee(String title) {
-        waits.until(ExpectedConditions.visibilityOfAllElements(listOfCoffee));
-        String coffeeT = titleCoffee.getText();
-        Assert.assertEquals(coffeeT, title);
-        return this;
+    public void checkTitleCoffee(String title) {
+        this.verifyTitle(title,titleCoffee);
     }
 
-    public void checkingListOfItems(String formatWord) {
-        int i = 0;
-        List<String> currentResult = new ArrayList<String>();
-        List<WebElement> actualResult = listOfCoffee;
-        waits.until(ExpectedConditions.visibilityOfAllElements(listOfCoffee));
-        for (WebElement listOfFormat : actualResult) {
-            currentResult.add(listOfFormat.getText().toLowerCase());
-            System.out.println(currentResult);
-            System.out.println(currentResult.get(i).contains(formatWord));
-            Assert.assertTrue(currentResult.get(i).contains(formatWord));
-            i++;
-        }
+    public void checkListOfItems(String formatWord) {
+        this.verifyListOfProducts(formatWord, listOfCoffee);
     }
 
     public CoffeePage searchLineChecking(){
         checkboxAmbassador.click();
-        return  this;
+        return this;
     }
 
 

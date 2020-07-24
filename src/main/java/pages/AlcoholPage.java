@@ -11,13 +11,22 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+<<<<<<< HEAD:src/main/java/pages/AlcoholPage.java
+public class AlcoholPage extends ProductPage{
+=======
 public class AlcoholPage {
+>>>>>>> b142ebfe5ebf35140818791f67f870122ff83f7d:src/main/java/pages/Alcohol.java
     protected WebDriver driver;
     private final Wait<WebDriver> waits;
 
     public AlcoholPage(WebDriver driver) {
+<<<<<<< HEAD:src/main/java/pages/AlcoholPage.java
+        super(driver);
+=======
         PageFactory.initElements(driver, this);
+>>>>>>> b142ebfe5ebf35140818791f67f870122ff83f7d:src/main/java/pages/Alcohol.java
         this.driver = driver;
+        PageFactory.initElements(this.driver, this);
         waits = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
     }
 
@@ -27,6 +36,10 @@ public class AlcoholPage {
     @FindBy(how = How.XPATH, using = "//li[@class='tile-cats__item']/a[@title='Кофе']")
     private WebElement coffeeButton;
 
+<<<<<<< HEAD:src/main/java/pages/AlcoholPage.java
+    public void verifyAlcoholTitle(String title) {
+        this.verifyTitle(title, heading);
+=======
 
 
 
@@ -36,6 +49,7 @@ public class AlcoholPage {
         System.out.println(headT);
       //  Assert.assertEquals(title, headT);
         return this;
+>>>>>>> b142ebfe5ebf35140818791f67f870122ff83f7d:src/main/java/pages/Alcohol.java
     }
 
     public CoffeePage clickCoffee() {
@@ -43,9 +57,5 @@ public class AlcoholPage {
         return new CoffeePage(driver);
     }
 
-//    public void checkingTitleCoffee(String title) {
-//        String coffeeT = titleCoffee.getText();
-//        Assert.assertEquals(coffeeT, title);
-//    }
 
 }

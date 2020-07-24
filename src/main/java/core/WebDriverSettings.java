@@ -9,9 +9,11 @@ public class WebDriverSettings {
     protected static WebDriver driver;
 
     @BeforeClass
-    public void setUp(){
+    @Parameters("navigateTo")
+    public void setUp(String navigateTo){
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        driver.get(navigateTo);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
 
