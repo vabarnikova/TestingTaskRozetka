@@ -14,12 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class RozetkaMainPage {
+public class BasePage extends ProductPage{
 
     protected WebDriver driver;
     private final Wait<WebDriver> waits;
 
-    public RozetkaMainPage(WebDriver driver) {
+    public BasePage(WebDriver driver) {
+        super(driver);
         PageFactory.initElements(driver, this);
         this.driver = driver;
         waits = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
@@ -37,41 +38,26 @@ public class RozetkaMainPage {
     @FindBy(how = How.XPATH, using = "//h1[@class='portal__heading']")
     private WebElement heading;
 
-
-
     @FindBy(how = How.XPATH, using = "//ul[contains(@class,'menu-categories_type_main')]//a[contains(@href, 'alkoholnie')]")
     private WebElement item;
 
-    public Alcohol getPageAlcohol() {
+    public AlcoholPage getPageAlcohol() {
         item.click();
-        return new Alcohol(driver);
+        return new AlcoholPage(driver);
     }
 
-
-
-    public RozetkaMainPage verifyRozetkaSearch(String searchWord) {
+    public void clickRozetkaSearch(String searchWord) {
         inpSearch.click();
         inpSearch.sendKeys(searchWord);
         inpSearch.sendKeys(Keys.ENTER);
-        return this;
     }
 
-    public RozetkaMainPage checkingListOfItems(String formatWord) {
-        int i = 0;
-        List<String> currentResult = new ArrayList<String>();
-        List<WebElement> actualResult = listOfgoods;
-        waits.until(ExpectedConditions.visibilityOfAllElements(listOfgoods));
-        for (WebElement listOfFormat : actualResult) {
-            currentResult.add(listOfFormat.getText());
-            System.out.println(currentResult);
-            Assert.assertTrue(currentResult.get(i).contains(formatWord));
-            i++;
-        }
-        return this;
+    public void checkListOfItems(String formatWord) {
+        this.verifyListOfProducts(formatWord,listOfgoods);
     }
 
-    public SignIn goToSignIn() {
+    public SignInPage goToSignIn() {
         userLink.click();
-        return new SignIn(driver);
+        return new SignInPage(driver);
     }
 }

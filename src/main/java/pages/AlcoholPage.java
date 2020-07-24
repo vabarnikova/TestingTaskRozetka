@@ -12,13 +12,14 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-public class Alcohol {
+public class AlcoholPage extends ProductPage{
     protected WebDriver driver;
     private final Wait<WebDriver> waits;
 
-    public Alcohol(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+    public AlcoholPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
+        PageFactory.initElements(this.driver, this);
         waits = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
     }
 
@@ -28,15 +29,8 @@ public class Alcohol {
     @FindBy(how = How.XPATH, using = "//li[@class='tile-cats__item']/a[@title='Кофе']")
     private WebElement coffeeButton;
 
-
-
-
-    public Alcohol verifyTitle(String title) {
-        waits.until(ExpectedConditions.visibilityOf(heading));
-        String headT = heading.getText();
-        System.out.println(headT);
-      //  Assert.assertEquals(title, headT);
-        return this;
+    public void verifyAlcoholTitle(String title) {
+        this.verifyTitle(title, heading);
     }
 
     public CoffeePage clickCoffee() {
@@ -44,9 +38,5 @@ public class Alcohol {
         return new CoffeePage(driver);
     }
 
-//    public void checkingTitleCoffee(String title) {
-//        String coffeeT = titleCoffee.getText();
-//        Assert.assertEquals(coffeeT, title);
-//    }
 
 }
