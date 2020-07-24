@@ -1,3 +1,5 @@
+package core;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,8 +16,8 @@ public class WebDriverSettings {
         driver.manage().window().maximize();
 
     }
-    @AfterClass
-    public void tearDown(){
-        driver.quit();
-    }
+//    @AfterClass
+//    public void tearDown(){
+//        driver.quit();
+//    }
 }

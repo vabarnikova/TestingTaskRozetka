@@ -10,13 +10,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
-public class Alcohol {
+public class AlcoholPage {
     protected WebDriver driver;
     private final Wait<WebDriver> waits;
 
-    public Alcohol(WebDriver driver) {
+    public AlcoholPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
         waits = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
@@ -31,7 +30,7 @@ public class Alcohol {
 
 
 
-    public Alcohol verifyTitle(String title) {
+    public AlcoholPage verifyTitle(String title) {
         waits.until(ExpectedConditions.visibilityOf(heading));
         String headT = heading.getText();
         System.out.println(headT);

@@ -11,13 +11,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
-public class SignIn {
+public class SignInPage {
     protected WebDriver driver;
     private final Wait<WebDriver> waits;
 
-    public SignIn(WebDriver driver) {
+    public SignInPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
         waits = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
@@ -35,17 +34,17 @@ public class SignIn {
     @FindBy(how = How.XPATH, using = "//button[contains(@class,'auth-modal__submit')]")
     private WebElement submitButton;
 
-    public SignIn inputEmail(String email){
+    public SignInPage inputEmail(String email){
         userEmail.sendKeys(email);
         return this;
     }
 
-    public SignIn inputPassword(String password){
+    public SignInPage inputPassword(String password){
         userPassword.sendKeys(password);
         return this;
     }
 
-    public SignIn inputAllKeys(String email, String passwd){
+    public SignInPage inputAllKeys(String email, String passwd){
         this.inputEmail(email);
         this.inputPassword(passwd);
         return this;
@@ -56,11 +55,15 @@ public class SignIn {
         String hex = Color.fromString(color).asHex();
         System.out.println(hex);
     }
+    public void incorrectPasswdField(String colorValue){
+        String color =  userPassword.getCssValue("background-color");
+        String hex = Color.fromString(color).asHex();
+        System.out.println(hex);
+    }
 
-
-    public SignUp registrationButton(){
+    public SignUpPage goToSignUp(){
         waits.until(ExpectedConditions.visibilityOf(registration));
         registration.click();
-        return new SignUp(driver);
+        return new SignUpPage(driver);
     }
 }

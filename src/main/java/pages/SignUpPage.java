@@ -12,11 +12,11 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class SignUp {
+public class SignUpPage {
     protected WebDriver driver;
     private final Wait<WebDriver> waits;
 
-    public SignUp(WebDriver driver) {
+    public SignUpPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
         waits = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
@@ -42,25 +42,25 @@ public class SignUp {
 
 
 
-    public SignIn alredyRegisteredButton(){
+    public SignInPage alredyRegisteredButton(){
         alreadyRegistered.click();
-        return new SignIn(driver);
+        return new SignInPage(driver);
     }
 
-    public SignUp inputUserName(String name){
+    public SignUpPage inputUserName(String name){
         userName.sendKeys(name);
         return this;
     }
-    public SignUp inputUserEmail(String email){
+    public SignUpPage inputUserEmail(String email){
         userEmail.sendKeys(email);
         return this;
     }
-    public SignUp inputUserPswd(String pswd){
+    public SignUpPage inputUserPswd(String pswd){
         userPassword.sendKeys(pswd);
         return this;
     }
 
-    public SignUp failRegistration(String name, String email, String password){
+    public SignUpPage failRegistration(String name, String email, String password){
         this.inputUserName(name);
         this.inputUserEmail(email);
         this.inputUserPswd(password);
@@ -68,7 +68,7 @@ public class SignUp {
         return this;
     }
 
-    public SignUp errorMessage(String error){
+    public SignUpPage errorMessage(String error){
         String msg = errorName.getText();
         System.out.println(msg);
         Assert.assertEquals(msg, error);

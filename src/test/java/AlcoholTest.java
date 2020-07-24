@@ -1,27 +1,27 @@
+import core.WebDriverSettings;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pages.Alcohol;
+import pages.AlcoholPage;
 import pages.CoffeePage;
 
-public class AlcoholTests extends WebDriverSettings {
-    protected Alcohol alcohol;
+public class AlcoholTest extends WebDriverSettings {
+    protected AlcoholPage alcoholPage;
     protected CoffeePage coffeePage;
 
     @BeforeClass
     public void init() {
         driver.get("https://rozetka.com.ua/alkoholnie-napitki-i-produkty/c4626923/");
-        alcohol = new Alcohol(driver);
+        alcoholPage = new AlcoholPage(driver);
     }
 
     @Test
     public void titleChekcingTest() {
-        alcohol.verifyTitle("Алкогольные напитки и продукты");
+        alcoholPage.verifyTitle("Алкогольные напитки и продукты");
     }
 
     @Test
     public void titleCoffeeTest() {
-        coffeePage = alcohol.clickCoffee();
+        coffeePage = alcoholPage.clickCoffee();
         coffeePage.checkingTitleCoffee("Кофе");
     }
-
 }
