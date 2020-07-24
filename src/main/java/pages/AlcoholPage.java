@@ -10,21 +10,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
-<<<<<<< HEAD:src/main/java/pages/AlcoholPage.java
 public class AlcoholPage extends ProductPage{
-=======
-public class AlcoholPage {
->>>>>>> b142ebfe5ebf35140818791f67f870122ff83f7d:src/main/java/pages/Alcohol.java
     protected WebDriver driver;
     private final Wait<WebDriver> waits;
 
     public AlcoholPage(WebDriver driver) {
-<<<<<<< HEAD:src/main/java/pages/AlcoholPage.java
         super(driver);
-=======
-        PageFactory.initElements(driver, this);
->>>>>>> b142ebfe5ebf35140818791f67f870122ff83f7d:src/main/java/pages/Alcohol.java
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
         waits = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
@@ -36,20 +29,8 @@ public class AlcoholPage {
     @FindBy(how = How.XPATH, using = "//li[@class='tile-cats__item']/a[@title='Кофе']")
     private WebElement coffeeButton;
 
-<<<<<<< HEAD:src/main/java/pages/AlcoholPage.java
     public void verifyAlcoholTitle(String title) {
         this.verifyTitle(title, heading);
-=======
-
-
-
-    public AlcoholPage verifyTitle(String title) {
-        waits.until(ExpectedConditions.visibilityOf(heading));
-        String headT = heading.getText();
-        System.out.println(headT);
-      //  Assert.assertEquals(title, headT);
-        return this;
->>>>>>> b142ebfe5ebf35140818791f67f870122ff83f7d:src/main/java/pages/Alcohol.java
     }
 
     public CoffeePage clickCoffee() {

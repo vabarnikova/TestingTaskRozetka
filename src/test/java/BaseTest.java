@@ -17,13 +17,8 @@ public class BaseTest extends WebDriverSettings {
 
     @Test
     public void SearchTests() {
-<<<<<<< HEAD
         mainPage.clickRozetkaSearch("ноутбук");
         mainPage.checkListOfItems("ноутбук");
-=======
-        mainPage.verifyRozetkaSearch("Ноутбук");
-        mainPage.checkingListOfItems("Ноутбук");
->>>>>>> b142ebfe5ebf35140818791f67f870122ff83f7d
 
     }
 

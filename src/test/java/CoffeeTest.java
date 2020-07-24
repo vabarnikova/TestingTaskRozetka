@@ -10,10 +10,6 @@ public class CoffeeTest extends WebDriverSettings {
     public void containsWordTests(){
         coffeePage = new CoffeePage(driver);
         coffeePage.searchLineChecking();
-<<<<<<< HEAD:src/test/java/CoffeeTest.java
         coffeePage.checkListOfItems("ambassador");
-=======
-        coffeePage.checkingListOfItems("ambassador");
->>>>>>> b142ebfe5ebf35140818791f67f870122ff83f7d:src/test/java/CoffeePageTests.java
     }
 }

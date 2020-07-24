@@ -28,4 +28,12 @@ public class SignInTest extends WebDriverSettings {
         signInPage.incorrectPasswdField("#fee8e8");
     }
 
+
+//go to signUp
+//    @Test
+//    public void emptyNameSignUp(){
+//        signUpPage = signInPage.registrationButton();
+//        signUpPage.failRegistration("", "v.abashdajs@gmail.com", "u6h4fks");
+//        signUpPage.errorMessage("Введите свое имя на кириллице");
+//    }
 }

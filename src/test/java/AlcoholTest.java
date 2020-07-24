@@ -16,12 +16,12 @@ public class AlcoholTest extends WebDriverSettings {
 
     @Test
     public void titleChekcingTest() {
-        alcoholPage.verifyTitle("Алкогольные напитки и продукты");
+        alcoholPage.verifyAlcoholTitle("Алкогольные напитки и продукты");
     }
 
     @Test
     public void titleCoffeeTest() {
         coffeePage = alcoholPage.clickCoffee();
-        coffeePage.checkingTitleCoffee("Кофе");
+        coffeePage.checkTitleCoffee("Кофе");
     }
 }
