@@ -10,18 +10,19 @@ public class AlcoholTest extends WebDriverSettings {
 
     @BeforeClass
     public void init() {
-        driver.get("https://rozetka.com.ua/alkoholnie-napitki-i-produkty/c4626923/");
         alcoholPage = new AlcoholPage();
     }
 
     @Test
     public void titleChekcingTest() {
-        alcoholPage.verifyAlcoholTitle("Алкогольные напитки и продукты");
+        alcoholPage = new AlcoholPage();
+        System.out.println(data.getAlcoholTitle());
+      //  alcoholPage.verifyAlcoholTitle(data.getAlcoholTitle());
     }
 
-    @Test
-    public void titleCoffeeTest() {
-        coffeePage = alcoholPage.clickCoffee();
-        coffeePage.checkTitleCoffee("Кофе");
-    }
+//    @Test
+//    public void titleCoffeeTest() {
+//        coffeePage = alcoholPage.clickCoffee();
+//        coffeePage.checkTitleCoffee(data.getCoffeeTitle());
+//    }
 }

@@ -12,16 +12,14 @@ public class SignUpTest extends WebDriverSettings {
 
     @BeforeClass
     public void Init(){
-        driver.get("http://rozetka.com.ua/");
         mainPage = new BasePage();
     }
-    //go to signUp
+
     @Test
     public void emptyNameSignUp(){
-
         signInPage = mainPage.goToSignIn();
         signUpPage = signInPage.goToSignUp();
-        signUpPage.failRegistration("", "v.abashdajs@gmail.com", "u6h4fks");
-        signUpPage.errorMessage("Введите свое имя на кириллице");
+        signUpPage.failRegistration("", data.getUserEmail(), data.getUserPassword());
+        signUpPage.errorMessage(data.getErrorMsgName());
     }
 }

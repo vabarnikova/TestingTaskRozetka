@@ -12,28 +12,19 @@ public class SignInTest extends WebDriverSettings {
 
     @BeforeClass
     public void Initial() {
-        driver.get("http://rozetka.com.ua/");
         mainPage = new BasePage();
         signInPage = mainPage.goToSignIn();
     }
     @Test
     public void incorrectAuthTest() {
-        signInPage.inputAllKeys("smt", "4g4h44ys");
-        signInPage.incorrectEmailField("#fee8e8");
+        signInPage.inputAllKeys(data.getUserEmail(), data.getUserPassword());
+        signInPage.incorrectEmailField(data.getErrorColor());
     }
 
     @Test
     public void emptyPasswdTest() {
-        signInPage.inputAllKeys("smt", "");
-        signInPage.incorrectPasswdField("#fee8e8");
+        signInPage.inputAllKeys(data.getUserEmail(), "");
+        signInPage.incorrectPasswdField(data.getErrorColor());
     }
 
-
-//go to signUp
-//    @Test
-//    public void emptyNameSignUp(){
-//        signUpPage = signInPage.registrationButton();
-//        signUpPage.failRegistration("", "v.abashdajs@gmail.com", "u6h4fks");
-//        signUpPage.errorMessage("Введите свое имя на кириллице");
-//    }
 }

@@ -8,9 +8,8 @@ public class CoffeeTest extends WebDriverSettings {
 
     @Test
     public void containsWordTests(){
-//        coffeePage = new CoffeePage(driver);
         coffeePage = new CoffeePage();
         coffeePage.searchLineChecking();
-        coffeePage.checkListOfItems("ambassador");
+        coffeePage.checkListOfItems(data.getWordContainsListOfCoffee());
     }
 }

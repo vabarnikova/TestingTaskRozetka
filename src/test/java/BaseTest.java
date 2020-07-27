@@ -11,22 +11,21 @@ public class BaseTest extends WebDriverSettings {
 
     @BeforeClass
     public void Initial() {
-        driver.get("http://rozetka.com.ua/");
         mainPage = new BasePage();
     }
 
     @Test
     public void SearchTests() {
-        mainPage.clickRozetkaSearch("ноутбук");
-        mainPage.checkListOfItems("ноутбук");
+        mainPage.clickRozetkaSearch(data.getSearchLaptop());
+        mainPage.checkListOfItems(data.getSearchLaptop());
 
     }
 
     @Test
     public void incorrectAuthTest() {
         signInPage = mainPage.goToSignIn();
-        signInPage.inputAllKeys("smt", "4g4h44ys");
-        signInPage.incorrectEmailField("#fee8e8");
+        signInPage.inputAllKeys(data.getUserEmail(), data.getUserPassword());
+        signInPage.incorrectEmailField(data.getErrorColor());
     }
 
 }
