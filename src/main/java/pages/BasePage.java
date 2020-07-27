@@ -1,5 +1,6 @@
 package pages;
 
+import core.WebDriverSettings;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -16,14 +17,8 @@ import java.util.List;
 
 public class BasePage extends ProductPage{
 
-    protected WebDriver driver;
-    private final Wait<WebDriver> waits;
-
-    public BasePage(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
-        waits = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
+    public BasePage(){
+        PageFactory.initElements(WebDriverSettings.getDriver(), this);
     }
 
     @FindBy(how = How.NAME, using = "search")
@@ -43,7 +38,7 @@ public class BasePage extends ProductPage{
 
     public AlcoholPage getPageAlcohol() {
         item.click();
-        return new AlcoholPage(driver);
+        return new AlcoholPage();
     }
 
     public void clickRozetkaSearch(String searchWord) {
@@ -58,6 +53,6 @@ public class BasePage extends ProductPage{
 
     public SignInPage goToSignIn() {
         userLink.click();
-        return new SignInPage(driver);
+        return new SignInPage();
     }
 }

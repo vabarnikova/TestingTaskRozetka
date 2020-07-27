@@ -1,5 +1,6 @@
 package pages;
 
+import core.WebDriverSettings;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -13,14 +14,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 public class AlcoholPage extends ProductPage{
-    protected WebDriver driver;
-    private final Wait<WebDriver> waits;
 
-    public AlcoholPage(WebDriver driver) {
-        super(driver);
-        this.driver = driver;
-        PageFactory.initElements(this.driver, this);
-        waits = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
+    public AlcoholPage(){
+        PageFactory.initElements(WebDriverSettings.getDriver(), this);
     }
 
     @FindBy(how = How.XPATH, using = "//h1[@class='portal__heading']")
@@ -35,7 +31,7 @@ public class AlcoholPage extends ProductPage{
 
     public CoffeePage clickCoffee() {
         coffeeButton.click();
-        return new CoffeePage(driver);
+        return new CoffeePage();
     }
 
 

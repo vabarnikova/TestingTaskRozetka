@@ -13,7 +13,7 @@ public class SignUpTest extends WebDriverSettings {
     @BeforeClass
     public void Init(){
         driver.get("http://rozetka.com.ua/");
-        mainPage = new BasePage(driver);
+        mainPage = new BasePage();
     }
     //go to signUp
     @Test

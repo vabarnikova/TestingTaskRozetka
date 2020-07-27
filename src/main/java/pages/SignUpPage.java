@@ -1,5 +1,6 @@
 package pages;
 
+import core.WebDriverSettings;
 import org.testng.Assert;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -13,13 +14,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class SignUpPage {
-    protected WebDriver driver;
-    private final Wait<WebDriver> waits;
 
-    public SignUpPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
-        waits = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
+    public  SignUpPage(){
+        PageFactory.initElements(WebDriverSettings.getDriver(), this);
     }
 
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='name']")
@@ -40,12 +37,6 @@ public class SignUpPage {
     @FindBy(how = How.XPATH, using = "//p[@class='validation-message']")
     private WebElement errorName;
 
-
-
-    public SignInPage alredyRegisteredButton(){
-        alreadyRegistered.click();
-        return new SignInPage(driver);
-    }
 
     public SignUpPage inputUserName(String name){
         userName.sendKeys(name);
@@ -73,6 +64,11 @@ public class SignUpPage {
         System.out.println(msg);
         Assert.assertEquals(msg, error);
         return this;
+    }
+
+    public SignInPage alreadyRegisteredButton(){
+        alreadyRegistered.click();
+        return new SignInPage();
     }
 
 

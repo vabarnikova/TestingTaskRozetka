@@ -1,29 +1,16 @@
 package pages;
 
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
+import core.WebDriverWaits;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductPage {
-    protected WebDriver driver;
-    private final Wait<WebDriver> waits;
-
-
-    public ProductPage(WebDriver driver){
-        driver = driver;
-        waits = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
-    }
+public class ProductPage extends WebDriverWaits {
 
     public void verifyTitle(String expTitle, WebElement actTitle) {
-        waits.until(ExpectedConditions.visibilityOf(actTitle));
+        waitForPresentEl(actTitle);
         String coffeeT = actTitle.getText();
         Assert.assertEquals(coffeeT, expTitle);
     }
@@ -32,7 +19,7 @@ public class ProductPage {
         int i = 0;
         List<String> currentResult = new ArrayList<String>();
         List<WebElement> actualResult = listOfEl;
-        waits.until(ExpectedConditions.visibilityOfAllElements(listOfEl));
+        waitForPresentListOfEl(listOfEl);
         for (WebElement listOfFormat : actualResult) {
             currentResult.add(listOfFormat.getText().toLowerCase());
             System.out.println(currentResult);

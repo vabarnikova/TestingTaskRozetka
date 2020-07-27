@@ -1,25 +1,17 @@
 package pages;
 
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
+import core.WebDriverSettings;
+import core.WebDriverWaits;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class SignInPage {
-    protected WebDriver driver;
-    private final Wait<WebDriver> waits;
+public class SignInPage extends WebDriverWaits{
 
-    public SignInPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
-        waits = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
+    public SignInPage(){
+        PageFactory.initElements(WebDriverSettings.getDriver(), this);
     }
 
     @FindBy(how = How.XPATH, using = "//a[@class='auth-modal__register-link']")
@@ -62,8 +54,8 @@ public class SignInPage {
     }
 
     public SignUpPage goToSignUp(){
-        waits.until(ExpectedConditions.visibilityOf(registration));
+        this.waitForPresentEl(registration);
         registration.click();
-        return new SignUpPage(driver);
+        return new SignUpPage();
     }
 }

@@ -1,5 +1,6 @@
 package pages;
 
+import core.WebDriverSettings;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -13,15 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoffeePage extends ProductPage{
-    protected WebDriver driver;
-    private final Wait<WebDriver> waits;
 
-    public CoffeePage(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
-        waits = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
+    public CoffeePage(){
+        PageFactory.initElements(WebDriverSettings.getDriver(), this);
     }
+
     @FindBy(how = How.XPATH, using = "//h1[@class='catalog-heading']")
     private WebElement titleCoffee;
 

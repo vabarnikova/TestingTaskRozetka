@@ -12,7 +12,7 @@ public class BaseTest extends WebDriverSettings {
     @BeforeClass
     public void Initial() {
         driver.get("http://rozetka.com.ua/");
-        mainPage = new BasePage(driver);
+        mainPage = new BasePage();
     }
 
     @Test

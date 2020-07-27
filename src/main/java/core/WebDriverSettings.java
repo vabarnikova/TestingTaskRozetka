@@ -8,6 +8,10 @@ import org.testng.annotations.*;
 public class WebDriverSettings {
     protected static WebDriver driver;
 
+    public static WebDriver getDriver(){
+        return driver;
+    }
+
     @BeforeClass
     @Parameters("navigateTo")
     public void setUp(String navigateTo){
@@ -16,10 +20,10 @@ public class WebDriverSettings {
         driver.get(navigateTo);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
-
     }
-//    @AfterClass
-//    public void tearDown(){
-//        driver.quit();
-//    }
+
+    @AfterClass
+    public void tearDown(){
+        driver.quit();
+    }
 }
