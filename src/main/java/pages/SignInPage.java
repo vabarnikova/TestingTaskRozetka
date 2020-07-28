@@ -45,12 +45,11 @@ public class SignInPage extends WebDriverWaits{
     public void incorrectEmailField(String colorValue){
         String color =  userEmail.getCssValue("background-color");
         String hex = Color.fromString(color).asHex();
-        System.out.println(hex);
     }
+
     public void incorrectPasswdField(String colorValue){
         String color =  userPassword.getCssValue("background-color");
         String hex = Color.fromString(color).asHex();
-        System.out.println(hex);
     }
 
     public SignUpPage goToSignUp(){

@@ -8,24 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductPage extends WebDriverWaits {
+    private String coffeeT;
 
-    public void verifyTitle(String expTitle, WebElement actTitle) {
+    public String verifyTitle(WebElement actTitle) {
         waitForPresentEl(actTitle);
-        String coffeeT = actTitle.getText();
-        Assert.assertEquals(coffeeT, expTitle);
+        return coffeeT = actTitle.getText();
     }
 
-    public void verifyListOfProducts(String searchWord, List<WebElement> listOfEl ){
-        int i = 0;
+    public List<String> verifyListOfProducts(List<WebElement> listOfEl ){
         List<String> currentResult = new ArrayList<String>();
         List<WebElement> actualResult = listOfEl;
         waitForPresentListOfEl(listOfEl);
         for (WebElement listOfFormat : actualResult) {
             currentResult.add(listOfFormat.getText().toLowerCase());
-            System.out.println(currentResult);
-            System.out.println(currentResult.get(i).contains(searchWord));
-            Assert.assertTrue(currentResult.get(i).contains(searchWord));
-            i++;
         }
+        return currentResult;
     }
 }

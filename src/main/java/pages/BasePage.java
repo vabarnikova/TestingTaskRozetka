@@ -16,6 +16,7 @@ import java.util.List;
 
 
 public class BasePage extends ProductPage{
+    private List<String> actualListOfProd;
 
     public BasePage(){
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
@@ -47,8 +48,9 @@ public class BasePage extends ProductPage{
         inpSearch.sendKeys(Keys.ENTER);
     }
 
-    public void checkListOfItems(String formatWord) {
-        this.verifyListOfProducts(formatWord,listOfgoods);
+    public List<String> checkListOfItems() {
+        actualListOfProd =this.verifyListOfProducts(listOfgoods);
+        return actualListOfProd;
     }
 
     public SignInPage goToSignIn() {

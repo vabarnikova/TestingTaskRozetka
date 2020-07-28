@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoffeePage extends ProductPage{
+    private List<String> actualListOfItems;
 
     public CoffeePage(){
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
@@ -28,12 +29,14 @@ public class CoffeePage extends ProductPage{
     @FindBy(how = How.XPATH, using = "//input[@id='Ambassador']/following-sibling::label")
     private WebElement checkboxAmbassador;
 
-    public void checkTitleCoffee(String title) {
-        this.verifyTitle(title,titleCoffee);
+    public String checkTitleCoffee() {
+       String expTitle = this.verifyTitle(titleCoffee);
+       return expTitle;
     }
 
-    public void checkListOfItems(String formatWord) {
-        this.verifyListOfProducts(formatWord, listOfCoffee);
+    public List<String> checkListOfItems() {
+       actualListOfItems = this.verifyListOfProducts(listOfCoffee);
+       return actualListOfItems;
     }
 
     public CoffeePage searchLineChecking(){

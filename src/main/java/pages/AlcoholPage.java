@@ -20,8 +20,9 @@ public class AlcoholPage extends ProductPage{
     @FindBy(how = How.XPATH, using = "//li[@class='tile-cats__item']/a[@title='Кофе']")
     private WebElement coffeeButton;
 
-    public void verifyAlcoholTitle(String title) {
-        this.verifyTitle(title, heading);
+    public String verifyAlcoholTitle() {
+       String expTitle = this.verifyTitle(heading);
+       return expTitle;
     }
 
     public CoffeePage clickCoffee() {

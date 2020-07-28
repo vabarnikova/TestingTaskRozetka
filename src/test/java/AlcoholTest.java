@@ -1,4 +1,5 @@
 import core.WebDriverSettings;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.AlcoholPage;
@@ -16,13 +17,15 @@ public class AlcoholTest extends WebDriverSettings {
     @Test
     public void titleChekcingTest() {
         alcoholPage = new AlcoholPage();
-        System.out.println(data.getAlcoholTitle());
-      //  alcoholPage.verifyAlcoholTitle(data.getAlcoholTitle());
+        String titleAlcohol = alcoholPage.verifyAlcoholTitle();
+        Assert.assertEquals(titleAlcohol,data.getAlcoholTitle());
+
     }
 
-//    @Test
-//    public void titleCoffeeTest() {
-//        coffeePage = alcoholPage.clickCoffee();
-//        coffeePage.checkTitleCoffee(data.getCoffeeTitle());
-//    }
+    @Test
+    public void titleCoffeeTest() {
+        coffeePage = alcoholPage.clickCoffee();
+        String titleCoffee = coffeePage.checkTitleCoffee();
+        Assert.assertEquals(titleCoffee,data.getCoffeeTitle());
+    }
 }

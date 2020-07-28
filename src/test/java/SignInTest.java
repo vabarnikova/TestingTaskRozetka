@@ -22,7 +22,7 @@ public class SignInTest extends WebDriverSettings {
     }
 
     @Test
-    public void emptyPasswdTest() {
+    public void emptyPasswordTest() {
         signInPage.inputAllKeys(data.getUserEmail(), "");
         signInPage.incorrectPasswdField(data.getErrorColor());
     }
