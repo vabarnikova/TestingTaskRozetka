@@ -2,10 +2,16 @@ package pages;
 
 import core.WebDriverSettings;
 
+import logging.FormatMsg;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 
 public class AlcoholPage extends ProductPage{

@@ -1,5 +1,6 @@
 package pages;
 
+import com.sun.tools.internal.ws.wsdl.document.soap.SOAPUse;
 import core.WebDriverSettings;
 import core.WebDriverWaits;
 import org.openqa.selenium.WebElement;
@@ -36,20 +37,24 @@ public class SignInPage extends WebDriverWaits{
         return this;
     }
 
-    public SignInPage inputAllKeys(String email, String passwd){
+    public SignInPage inputAllKeys(String email, String passwd) throws InterruptedException {
         this.inputEmail(email);
         this.inputPassword(passwd);
+        submitButton.click();
+        //Thread.sleep(2000);
         return this;
     }
 
-    public void incorrectEmailField(String colorValue){
+    public String incorrectEmailField(){
         String color =  userEmail.getCssValue("background-color");
         String hex = Color.fromString(color).asHex();
+        return hex;
     }
 
-    public void incorrectPasswdField(String colorValue){
+    public String incorrectPasswdField(){
         String color =  userPassword.getCssValue("background-color");
         String hex = Color.fromString(color).asHex();
+        return hex;
     }
 
     public SignUpPage goToSignUp(){

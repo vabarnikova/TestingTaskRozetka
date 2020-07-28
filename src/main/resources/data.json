@@ -2,10 +2,10 @@
   "alcoholTitle": "Алкогольные напитки и продукты",
   "coffeeTitle": "Кофе",
   "searchLaptop": "ноутбук",
-  "userEmail": "someone@gmail.com",
+  "userEmail": "somebody",
   "userPassword": "5g6hsm89",
   "userName": "someone",
-  "errorColor": "#fee8e8",
+  "errorColor": "#ffffff",
   "wordContainsListOfCoffee": "ambassador",
   "errorMsgName": "Введите свое имя на кириллице"
 }

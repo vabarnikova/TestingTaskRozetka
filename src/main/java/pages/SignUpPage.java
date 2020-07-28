@@ -59,11 +59,9 @@ public class SignUpPage {
         return this;
     }
 
-    public SignUpPage errorMessage(String error){
+    public String errorMessage(){
         String msg = errorName.getText();
-        System.out.println(msg);
-        Assert.assertEquals(msg, error);
-        return this;
+        return msg;
     }
 
     public SignInPage alreadyRegisteredButton(){

@@ -9,8 +9,13 @@ public class DataForTesting {
     private String userPassword;
     private String userName;
     private String errorColor;
+    private String errorColorPasswd;
     private String wordContainsListOfCoffee;
     private String errorMsgName;
+
+    public String getErrorColorPasswd() {
+        return errorColorPasswd;
+    }
 
     public String getAlcoholTitle() {
         return alcoholTitle;
