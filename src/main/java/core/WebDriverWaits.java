@@ -12,14 +12,14 @@ import java.util.List;
 
 public class WebDriverWaits {
 
-    private Wait<WebDriver> waits;
+    private static Wait<WebDriver> waits;
 
-    public void waitForPresentEl(WebElement element){
+    public static void waitForPresentEl(WebElement element) {
         waits = new WebDriverWait(WebDriverSettings.getDriver(), 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
         waits.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void waitForPresentListOfEl(List<WebElement> element){
+    public static void waitForPresentListOfEl(List<WebElement> element) {
         waits = new WebDriverWait(WebDriverSettings.getDriver(), 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
         waits.until(ExpectedConditions.visibilityOfAllElements(element));
     }

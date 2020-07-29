@@ -1,19 +1,17 @@
-
 import core.WebDriverSettings;
-import logging.FormatMsg;
-import logging.WebDriverLogs;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.AlcoholPage;
 import pages.CoffeePage;
 
-import java.util.logging.*;
+import java.util.logging.Logger;
 
 public class AlcoholTest extends WebDriverSettings {
     protected AlcoholPage alcoholPage;
     protected CoffeePage coffeePage;
     protected Logger log;
+
     @BeforeClass
     public void init() {
         alcoholPage = new AlcoholPage();
@@ -22,11 +20,11 @@ public class AlcoholTest extends WebDriverSettings {
     }
 
     @Test
-    public void titleChekcingTest() {
+    public void titleCheckingTest() {
         log.info("Checking Alcohol Page title");
         String titleAlcohol = alcoholPage.verifyAlcoholTitle();
-        Assert.assertEquals(data.getAlcoholTitle(),titleAlcohol,
-                "-- Failed. Actual alcoholTitle not equal expected alcoholTitle --");
+        Assert.assertEquals(data.getAlcoholTitle(), titleAlcohol,
+                "-- Failed. Actual alcoholTitle isn't equal expected alcoholTitle --");
     }
 
     @Test
@@ -36,8 +34,8 @@ public class AlcoholTest extends WebDriverSettings {
         log.info("** Open Coffee Page **");
         String titleCoffee = coffeePage.checkTitleCoffee();
         log.info("Checking Coffee Page title");
-        Assert.assertEquals(titleCoffee,data.getCoffeeTitle(),
-                "-- Failed. Actual coffeeTitle not equal expected coffeeTitle --");
+        Assert.assertEquals(titleCoffee, data.getCoffeeTitle(),
+                "-- Failed. Actual coffeeTitle isn't equal expected coffeeTitle --");
     }
 }
 

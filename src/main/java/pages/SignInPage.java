@@ -1,17 +1,15 @@
 package pages;
 
-import com.sun.tools.internal.ws.wsdl.document.soap.SOAPUse;
 import core.WebDriverSettings;
 import core.WebDriverWaits;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
-public class SignInPage extends WebDriverWaits{
+public class SignInPage extends AuthorizationPage {
 
-    public SignInPage(){
+    public SignInPage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
     }
 
@@ -27,38 +25,35 @@ public class SignInPage extends WebDriverWaits{
     @FindBy(how = How.XPATH, using = "//button[contains(@class,'auth-modal__submit')]")
     private WebElement submitButton;
 
-    public SignInPage inputEmail(String email){
+    public SignInPage inputEmail(String email) {
+        userEmail.clear();
         userEmail.sendKeys(email);
         return this;
     }
 
-    public SignInPage inputPassword(String password){
+    public SignInPage inputPassword(String password) {
+        userPassword.clear();
         userPassword.sendKeys(password);
         return this;
     }
 
-    public SignInPage inputAllKeys(String email, String passwd) throws InterruptedException {
-        this.inputEmail(email);
-        this.inputPassword(passwd);
+    public SignInPage clickToSubmit() {
         submitButton.click();
-        //Thread.sleep(2000);
         return this;
     }
 
-    public String incorrectEmailField(){
-        String color =  userEmail.getCssValue("background-color");
-        String hex = Color.fromString(color).asHex();
-        return hex;
+    public String getIncorrectEmailField() {
+        String incorrectColor = this.getIncorrectFieldColor(userEmail);
+        return incorrectColor;
     }
 
-    public String incorrectPasswdField(){
-        String color =  userPassword.getCssValue("background-color");
-        String hex = Color.fromString(color).asHex();
-        return hex;
+    public String getIncorrectPasswdField() {
+        String incorrectColor = this.getIncorrectFieldColor(userPassword);
+        return incorrectColor;
     }
 
-    public SignUpPage goToSignUp(){
-        this.waitForPresentEl(registration);
+    public SignUpPage goToSignUp() {
+        WebDriverWaits.waitForPresentEl(registration);
         registration.click();
         return new SignUpPage();
     }

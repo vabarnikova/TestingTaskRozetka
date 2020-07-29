@@ -1,22 +1,15 @@
 package pages;
 
 import core.WebDriverSettings;
-
-import logging.FormatMsg;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Handler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
+public class AlcoholPage extends ProductPage {
 
-public class AlcoholPage extends ProductPage{
-
-    public AlcoholPage(){
+    public AlcoholPage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
     }
 
@@ -27,8 +20,8 @@ public class AlcoholPage extends ProductPage{
     private WebElement coffeeButton;
 
     public String verifyAlcoholTitle() {
-       String expTitle = this.verifyTitle(heading);
-       return expTitle;
+        String expTitle = this.verifyTitle(heading);
+        return expTitle;
     }
 
     public CoffeePage clickCoffee() {

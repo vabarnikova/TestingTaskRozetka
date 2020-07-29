@@ -1,5 +1,4 @@
 import core.WebDriverSettings;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -14,21 +13,21 @@ public class CoffeeTest extends WebDriverSettings {
     protected Logger log;
 
     @BeforeClass
-    public void init(){
+    public void init() {
         log = logs.writeLogs(getClass());
         log.info("** Open Coffee Page **");
     }
 
     @Test
-    public void containsWordTests(){
+    public void containsWordTests() {
         coffeePage = new CoffeePage();
         log.info("Click on Ambassador checkbox");
         coffeePage.searchLineChecking();
         listOfCoffee = coffeePage.checkListOfItems();
         log.info("Checking that list of coffee contains word");
-        for(String listOfWord : listOfCoffee){
-            Assert.assertTrue(listOfWord.contains(data.getWordContainsListOfCoffee()),"-- Failed. "+
-                    listOfWord + " doesn't contain word " + data.getWordContainsListOfCoffee()+" --\n");
+        for (String listOfWord : listOfCoffee) {
+            Assert.assertTrue(listOfWord.contains(data.getWordContainsListOfCoffee()), "-- Failed. " +
+                    listOfWord + " doesn't contain word " + data.getWordContainsListOfCoffee() + " --\n");
         }
 
     }
