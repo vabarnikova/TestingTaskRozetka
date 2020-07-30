@@ -20,7 +20,7 @@ public class BaseTest extends WebDriverSettings {
     }
 
     @Test
-    public void searchTests() {
+    public void containsWordTest() {
         mainPage.clickRozetkaSearch(data.getSearchLaptop());
         log.info("Pass word " + data.getSearchLaptop() + " to search string");
         listOfLaptops = mainPage.checkListOfItems();
@@ -30,4 +30,18 @@ public class BaseTest extends WebDriverSettings {
                     listOfWord + " doesn't contain word " + data.getSearchLaptop() + " --\n");
         }
     }
+
+    @Test
+    public void containsWordOptionTest() {
+        log.info("Pass word " + data.getSearchLaptop() + " to search string");
+        mainPage.clickRozetkaSearch(data.getSearchLaptop());
+        log.info("Click on checkbox: " + data.getOneOptionContainsListOfLaptops());
+        mainPage.clickOnCheckbox(data.getOneOptionContainsListOfLaptops());
+        listOfLaptops = mainPage.checkListOfItems();
+        for (String listOfWord : listOfLaptops) {
+            Assert.assertTrue(listOfWord.contains(data.getOneOptionContainsListOfLaptops().toLowerCase()), "-- Failed. " +
+                    listOfWord + " doesn't contain word " + data.getOneOptionContainsListOfLaptops().toLowerCase() + " --\n");
+        }
+    }
+
 }

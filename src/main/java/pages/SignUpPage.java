@@ -9,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 
 public class SignUpPage extends AuthorizationPage {
 
+    private String incorrectColor;
+
     public SignUpPage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
     }
@@ -56,8 +58,7 @@ public class SignUpPage extends AuthorizationPage {
     }
 
     public String getIncorrectPasswdField() {
-        String incorrectColor = this.getIncorrectFieldColor(userPassword);
-        return incorrectColor;
+        return incorrectColor = this.getIncorrectFieldColor(userPassword);
     }
 
     public String getErrorNameMessage() {

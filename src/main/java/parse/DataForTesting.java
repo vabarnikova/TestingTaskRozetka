@@ -9,9 +9,38 @@ public class DataForTesting {
     private String userPassword;
     private String userName;
     private String errorColor;
-    private String wordContainsListOfCoffee;
+    private String oneOptionContainsListOfCoffee;
+    private String twoOptionsContainListOfCoffee;
     private String errorMsgName;
     private String errorMsgEmail;
+    private String validUserEmail;
+    private String validUserPassword;
+    private String validAuthUserName;
+    private String oneOptionContainsListOfLaptops;
+
+    public String getOneOptionContainsListOfLaptops() {
+        return oneOptionContainsListOfLaptops;
+    }
+
+    public String getOneOptionContainsListOfCoffee() {
+        return oneOptionContainsListOfCoffee;
+    }
+
+    public String getTwoOptionsContainListOfCoffee() {
+        return twoOptionsContainListOfCoffee;
+    }
+
+    public String getValidAuthUserName() {
+        return validAuthUserName;
+    }
+
+    public String getValidUserEmail() {
+        return validUserEmail;
+    }
+
+    public String getValidUserPassword() {
+        return validUserPassword;
+    }
 
     public String getErrorMsgEmail() {
         return errorMsgEmail;
@@ -45,9 +74,6 @@ public class DataForTesting {
         return errorColor;
     }
 
-    public String getWordContainsListOfCoffee() {
-        return wordContainsListOfCoffee;
-    }
 
     public String getErrorMsgName() {
         return errorMsgName;

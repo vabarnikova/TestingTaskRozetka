@@ -46,4 +46,18 @@ public class SignInTest extends WebDriverSettings {
         Assert.assertTrue(color != data.getErrorColor(), "-- Failed. Because input colour is white -- \n");
     }
 
+    @Test
+    public void successfulAuthorization() {
+        log.info("Input user email: " + data.getValidUserEmail());
+        signInPage.inputEmail(data.getValidUserEmail());
+        log.info("Input user password: " + data.getValidUserPassword());
+        signInPage.inputPassword(data.getValidUserPassword());
+        log.info("Click to submit data");
+        signInPage.clickToSubmit();
+        log.info("Checking that authorization is correct");
+        signInPage.getAuthorizedUserName(data.getValidAuthUserName());
+        String authUserName = signInPage.getAuthorizedUserName(data.getValidAuthUserName());
+        Assert.assertEquals(authUserName, data.getValidAuthUserName(), "-- Failed. Because user's name " + authUserName
+                + " isn't equal " + data.getValidAuthUserName() + "  -- \n");
+    }
 }

@@ -2,12 +2,15 @@ package pages;
 
 import core.WebDriverSettings;
 import core.WebDriverWaits;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 public class SignInPage extends AuthorizationPage {
+
+    String incorrectColor;
 
     public SignInPage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
@@ -24,6 +27,16 @@ public class SignInPage extends AuthorizationPage {
 
     @FindBy(how = How.XPATH, using = "//button[contains(@class,'auth-modal__submit')]")
     private WebElement submitButton;
+
+
+    public String getAuthorizedUserName(String name) {
+        String userNameXpath = String.format("//p[@class='header-topline__user-text']/a[text()[contains(.,'%s')]]", name);
+        By authorizedUserPage = By.xpath(userNameXpath);
+        WebDriverWaits.waitForPresentEl(authorizedUserPage);
+        WebElement webUserName = WebDriverSettings.getDriver().findElement(authorizedUserPage);
+        String userName = webUserName.getText();
+        return userName;
+    }
 
     public SignInPage inputEmail(String email) {
         userEmail.clear();
@@ -43,13 +56,11 @@ public class SignInPage extends AuthorizationPage {
     }
 
     public String getIncorrectEmailField() {
-        String incorrectColor = this.getIncorrectFieldColor(userEmail);
-        return incorrectColor;
+        return incorrectColor = this.getIncorrectFieldColor(userEmail);
     }
 
     public String getIncorrectPasswdField() {
-        String incorrectColor = this.getIncorrectFieldColor(userPassword);
-        return incorrectColor;
+        return incorrectColor = this.getIncorrectFieldColor(userPassword);
     }
 
     public SignUpPage goToSignUp() {
@@ -57,4 +68,5 @@ public class SignInPage extends AuthorizationPage {
         registration.click();
         return new SignUpPage();
     }
+
 }

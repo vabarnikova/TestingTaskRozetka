@@ -1,6 +1,8 @@
 package pages;
 
 import core.WebDriverSettings;
+import core.WebDriverWaits;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,6 +41,7 @@ public class BasePage extends ProductPage {
 
     public void clickRozetkaSearch(String searchWord) {
         inpSearch.click();
+        inpSearch.clear();
         inpSearch.sendKeys(searchWord);
         inpSearch.sendKeys(Keys.ENTER);
     }
@@ -46,6 +49,10 @@ public class BasePage extends ProductPage {
     public List<String> checkListOfItems() {
         actualListOfProd = this.verifyListOfProducts(listOfgoods);
         return actualListOfProd;
+    }
+
+    public void clickOnCheckbox(String optionName) {
+        this.clickOnPageCheckbox(optionName,"//input[@id='%s']/following-sibling::label");
     }
 
     public SignInPage goToSignIn() {
