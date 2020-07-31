@@ -2,10 +2,16 @@
   "alcoholTitle": "Алкогольные напитки и продукты",
   "coffeeTitle": "Кофе",
   "searchLaptop": "ноутбук",
-  "userEmail": "someone@gmail.com",
+  "oneOptionContainsListOfLaptops": "Apple",
+  "userEmail": "body@gmail.com",
+  "validUserEmail": "n.mykola@gmail.com",
   "userPassword": "5g6hsm89",
-  "userName": "someone",
-  "errorColor": "#fee8e8",
-  "wordContainsListOfCoffee": "ambassador",
-  "errorMsgName": "Введите свое имя на кириллице"
+  "validUserPassword": "1a2b3c4d5e",
+  "userName": "some",
+  "validAuthUserName": "Николай",
+  "errorColor": "#ffffff",
+  "oneOptionContainsListOfCoffee": "Ambassador",
+  "twoOptionsContainListOfCoffee": "кофе в зернах ambassador",
+  "errorMsgName": "Введите свое имя на кириллице",
+  "errorMsgEmail": "Введите свою эл. почту"
 }

@@ -2,15 +2,13 @@ import core.WebDriverSettings;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pages.AlcoholPage;
 import pages.BasePage;
-import pages.SignInPage;
 
 import java.util.List;
 
 public class BaseTest extends WebDriverSettings {
+
     protected BasePage mainPage;
-    protected SignInPage signInPage;
     private List<String> listOfLaptops;
 
     @BeforeClass
@@ -19,19 +17,24 @@ public class BaseTest extends WebDriverSettings {
     }
 
     @Test
-    public void SearchTests() {
+    public void containsWordTest() {
         mainPage.clickRozetkaSearch(data.getSearchLaptop());
         listOfLaptops = mainPage.checkListOfItems();
-        for (String listOfWord : listOfLaptops){
-            Assert.assertTrue(listOfWord.contains(data.getSearchLaptop()));
+        for (String listOfWord : listOfLaptops) {
+            Assert.assertTrue(listOfWord.contains(data.getSearchLaptop()), "-- Failed. " +
+                    listOfWord + " doesn't contain word " + data.getSearchLaptop() + " --\n");
         }
     }
 
     @Test
-    public void incorrectAuthTest() {
-        signInPage = mainPage.goToSignIn();
-        signInPage.inputAllKeys(data.getUserEmail(), data.getUserPassword());
-        signInPage.incorrectEmailField(data.getErrorColor());
+    public void containsWordOptionTest() {
+        mainPage.clickRozetkaSearch(data.getSearchLaptop());
+        mainPage.clickOnCheckbox(data.getOneOptionContainsListOfLaptops());
+        listOfLaptops = mainPage.checkListOfItems();
+        for (String listOfWord : listOfLaptops) {
+            Assert.assertTrue(listOfWord.contains(data.getOneOptionContainsListOfLaptops().toLowerCase()), "-- Failed. " +
+                    listOfWord + " doesn't contain word " + data.getOneOptionContainsListOfLaptops().toLowerCase() + " --\n");
+        }
     }
 
 }

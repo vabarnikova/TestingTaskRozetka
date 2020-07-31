@@ -15,17 +15,18 @@ public class AlcoholTest extends WebDriverSettings {
     }
 
     @Test
-    public void titleChekcingTest() {
-        alcoholPage = new AlcoholPage();
+    public void titleCheckingTest() {
         String titleAlcohol = alcoholPage.verifyAlcoholTitle();
-        Assert.assertEquals(titleAlcohol,data.getAlcoholTitle());
-
+        Assert.assertEquals(data.getAlcoholTitle(), titleAlcohol,
+                "-- Failed. Actual alcoholTitle isn't equal expected alcoholTitle --");
     }
 
     @Test
     public void titleCoffeeTest() {
         coffeePage = alcoholPage.clickCoffee();
         String titleCoffee = coffeePage.checkTitleCoffee();
-        Assert.assertEquals(titleCoffee,data.getCoffeeTitle());
+        Assert.assertEquals(titleCoffee, data.getCoffeeTitle(),
+                "-- Failed. Actual coffeeTitle isn't equal expected coffeeTitle --");
     }
 }
+

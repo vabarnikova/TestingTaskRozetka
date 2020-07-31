@@ -1,22 +1,24 @@
 package pages;
 
 import core.WebDriverSettings;
-import org.testng.Assert;
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
+import logging.WebDriverLogs;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.logging.Logger;
 
 
-public class SignUpPage {
+public class SignUpPage extends AuthorizationPage {
 
-    public  SignUpPage(){
+    private String incorrectColor;
+    private Logger log;
+
+    public SignUpPage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
+        log = WebDriverLogs.writeLogs(getClass());
+        log.info("** Open SignUp Page **");
     }
 
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='name']")
@@ -31,45 +33,53 @@ public class SignUpPage {
     @FindBy(how = How.XPATH, using = "//button[contains(@class,'auth-modal__submit')]")
     private WebElement registration;
 
-    @FindBy(how = How.XPATH, using = "//button[contains(@class,'auth-modal__register-link')]")
-    private WebElement alreadyRegistered;
+    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='name']//following-sibling::form-error/p")
+    private WebElement errorMsgName;
 
-    @FindBy(how = How.XPATH, using = "//p[@class='validation-message']")
-    private WebElement errorName;
+    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='username']//following-sibling::form-error/p")
+    private WebElement errorMsgEmail;
 
 
-    public SignUpPage inputUserName(String name){
+    public SignUpPage inputUserName(String name) {
+        log.info("Input empty user name: " + name);
+        userName.clear();
         userName.sendKeys(name);
         return this;
     }
-    public SignUpPage inputUserEmail(String email){
+
+    public SignUpPage inputUserEmail(String email) {
+        log.info("Input user email: " + email);
+        userEmail.clear();
         userEmail.sendKeys(email);
         return this;
     }
-    public SignUpPage inputUserPswd(String pswd){
+
+    public SignUpPage inputUserPswd(String pswd) {
+        log.info("Input user password: " + pswd);
+        userPassword.clear();
         userPassword.sendKeys(pswd);
         return this;
     }
 
-    public SignUpPage failRegistration(String name, String email, String password){
-        this.inputUserName(name);
-        this.inputUserEmail(email);
-        this.inputUserPswd(password);
+    public SignUpPage clickToRegistration() {
+        log.info("Click to register");
         registration.click();
         return this;
     }
 
-    public SignUpPage errorMessage(String error){
-        String msg = errorName.getText();
-        System.out.println(msg);
-        Assert.assertEquals(msg, error);
-        return this;
+    public String getIncorrectPasswdField() {
+        return incorrectColor = this.getIncorrectFieldColor(userPassword);
     }
 
-    public SignInPage alreadyRegisteredButton(){
-        alreadyRegistered.click();
-        return new SignInPage();
+    public String getErrorNameMessage() {
+        log.info("Checking that error message is correct");
+        String msg = errorMsgName.getText();
+        return msg;
     }
 
+    public String getErrorEmailMessage() {
+        String msg = errorMsgEmail.getText();
+        return msg;
+    }
 
 }
