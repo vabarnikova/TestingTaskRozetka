@@ -10,7 +10,7 @@
   "userName": "some",
   "validAuthUserName": "Николай",
   "errorColor": "#ffffff",
-  "oneOptionContainsListOfCoffee": "ambassador",
+  "oneOptionContainsListOfCoffee": "Ambassador",
   "twoOptionsContainListOfCoffee": "кофе в зернах ambassador",
   "errorMsgName": "Введите свое имя на кириллице",
   "errorMsgEmail": "Введите свою эл. почту"

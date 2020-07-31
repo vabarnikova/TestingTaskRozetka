@@ -12,17 +12,12 @@ public class WebDriverWaits {
     private static Wait<WebDriver> waits;
 
     public static void waitForPresentEl(WebElement element) {
-        waits = new WebDriverWait(WebDriverSettings.getDriver(), 7).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
+        waits = new WebDriverWait(WebDriverSettings.getDriver(), 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
         waits.until(ExpectedConditions.visibilityOf(element));
     }
 
     public static void waitForPresentEl(List<WebElement> element) {
         waits = new WebDriverWait(WebDriverSettings.getDriver(), 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
         waits.until(ExpectedConditions.visibilityOfAllElements(element));
-    }
-
-    public static void waitForPresentEl(By el) {
-        waits = new WebDriverWait(WebDriverSettings.getDriver(), 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
-        waits.until(ExpectedConditions.presenceOfElementLocated(el));
     }
 }

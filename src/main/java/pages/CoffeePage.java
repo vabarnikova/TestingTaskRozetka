@@ -2,6 +2,7 @@ package pages;
 
 import core.WebDriverSettings;
 import core.WebDriverWaits;
+import logging.WebDriverLogs;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -9,14 +10,16 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class CoffeePage extends ProductPage {
     private List<String> actualListOfItems;
-    private Actions actions;
+    private Logger log;
 
     public CoffeePage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
-        actions = new Actions(WebDriverSettings.getDriver());
+        log = WebDriverLogs.writeLogs(getClass());
+        log.info("** Open Coffee Page **");
     }
 
     @FindBy(how = How.XPATH, using = "//h1[@class='catalog-heading']")
@@ -31,11 +34,8 @@ public class CoffeePage extends ProductPage {
     @FindBy(how = How.XPATH, using = "//app-product-buy-btn[@class='product__buy']")
     private WebElement buttonBuy;
 
-    @FindBy(how = How.XPATH, using = "//div[@class='js-rz-cart']/div")
+    @FindBy(how = How.XPATH, using = "//div[@class='js-rz-cart']/div/a")
     private WebElement buttonBasket;
-
-    @FindBy(how = How.XPATH, using = "//p[@class='header-cart__bottom']/a")
-    private WebElement goToBasket;
 
     @FindBy(how = How.XPATH, using = "//div[@class='cart-product']")
     private List<WebElement> productsInBasket;
@@ -46,32 +46,33 @@ public class CoffeePage extends ProductPage {
     }
 
     public void clickOnItem() {
-        WebDriverWaits.waitForPresentEl(coffeeItem);
+        log.info("Click on coffee product");
         coffeeItem.click();
     }
 
     public void clickOnButtonBuy() {
-        WebDriverWaits.waitForPresentEl(buttonBuy);
+        log.info("Click on button \"Купить\"");
         buttonBuy.click();
     }
 
     public void clickOnButtonBasket() {
-        actions.moveToElement(buttonBasket).build().perform();
-        WebDriverWaits.waitForPresentEl(goToBasket);
-        goToBasket.click();
+        log.info("Click on button \"Корзина\"");
+        buttonBasket.click();
     }
 
     public boolean isContainsProducts() {
-        WebDriverWaits.waitForPresentEl(productsInBasket);
+        log.info("Checking that basket contains products");
         return productsInBasket.size() > 0;
     }
 
     public String checkTitleCoffee() {
-        String expTitle = this.verifyTitle(titleCoffee);
+        log.info("Checking Coffee Page title");
+        String expTitle = titleCoffee.getText();
         return expTitle;
     }
 
     public List<String> checkListOfItems() {
+        log.info("Checking that list of coffee contains word");
         actualListOfItems = this.verifyListOfProducts(listOfCoffee);
         return actualListOfItems;
     }

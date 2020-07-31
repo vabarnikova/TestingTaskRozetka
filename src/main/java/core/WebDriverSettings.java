@@ -1,7 +1,6 @@
 package core;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import logging.WebDriverLogs;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
@@ -10,11 +9,12 @@ import org.testng.annotations.Parameters;
 import parse.DataForTesting;
 import parse.ParsingData;
 
+import java.util.concurrent.TimeUnit;
+
 public class WebDriverSettings {
     protected static WebDriver driver;
     protected ParsingData parsingData;
     protected DataForTesting data;
-    protected WebDriverLogs logs;
 
     public static WebDriver getDriver() {
         return driver;
@@ -25,12 +25,12 @@ public class WebDriverSettings {
     public void setUp(String navigateTo) {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get(navigateTo);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
         parsingData = new ParsingData();
         data = parsingData.dataParse();
-        logs = new WebDriverLogs();
     }
 
     @AfterClass

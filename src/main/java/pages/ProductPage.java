@@ -2,18 +2,19 @@ package pages;
 
 import core.WebDriverSettings;
 import core.WebDriverWaits;
+import logging.WebDriverLogs;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class ProductPage {
-    private String coffeeT;
+    private Logger log;
 
-    public String verifyTitle(WebElement actTitle) {
-        WebDriverWaits.waitForPresentEl(actTitle);
-        return coffeeT = actTitle.getText();
+    public ProductPage(){
+        log = WebDriverLogs.writeLogs(getClass());
     }
 
     public List<String> verifyListOfProducts(List<WebElement> listOfEl) {
@@ -27,9 +28,9 @@ public class ProductPage {
     }
 
     public void clickOnPageCheckbox(String optionName, String xPath) {
+        log.info("Click on "+optionName +" checkbox");
         String optionXpath = String.format(xPath, optionName);
         By option = By.xpath(optionXpath);
-        WebDriverWaits.waitForPresentEl(option);
         WebElement checkbox = WebDriverSettings.getDriver().findElement(option);
         if (!checkbox.isSelected())
             checkbox.click();
