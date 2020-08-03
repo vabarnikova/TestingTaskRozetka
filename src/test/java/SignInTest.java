@@ -33,7 +33,7 @@ public class SignInTest extends WebDriverSettings {
         Assert.assertTrue(color != data.getErrorColor(), "-- Failed. Because input colour is white -- \n");
     }
 
-    @Test
+    @Test(description = "test fails periodically")
     public void successfulAuthorization() {
         signInPage.inputEmail(data.getValidUserEmail());
         signInPage.inputPassword(data.getValidUserPassword());
