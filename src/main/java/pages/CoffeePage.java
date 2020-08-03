@@ -1,10 +1,7 @@
 package pages;
 
 import core.WebDriverSettings;
-import core.WebDriverWaits;
-import logging.WebDriverLogs;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
@@ -18,7 +15,7 @@ public class CoffeePage extends ProductPage {
 
     public CoffeePage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
-        log = WebDriverLogs.writeLogs(getClass());
+        log = Logger.getLogger(CoffeePage.class.getName());
         log.info("** Open Coffee Page **");
     }
 
@@ -34,7 +31,7 @@ public class CoffeePage extends ProductPage {
     @FindBy(how = How.XPATH, using = "//app-product-buy-btn[@class='product__buy']")
     private WebElement buttonBuy;
 
-    @FindBy(how = How.XPATH, using = "//div[@class='js-rz-cart']/div/a")
+    @FindBy(how = How.XPATH, using = "//a[contains(@class,'button_state_active')]")
     private WebElement buttonBasket;
 
     @FindBy(how = How.XPATH, using = "//div[@class='cart-product']")
@@ -76,5 +73,4 @@ public class CoffeePage extends ProductPage {
         actualListOfItems = this.verifyListOfProducts(listOfCoffee);
         return actualListOfItems;
     }
-
 }

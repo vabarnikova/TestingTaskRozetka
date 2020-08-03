@@ -2,7 +2,6 @@ package pages;
 
 import core.WebDriverSettings;
 import core.WebDriverWaits;
-import logging.WebDriverLogs;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -14,7 +13,7 @@ public class ProductPage {
     private Logger log;
 
     public ProductPage(){
-        log = WebDriverLogs.writeLogs(getClass());
+        log = Logger.getLogger(CoffeePage.class.getName());
     }
 
     public List<String> verifyListOfProducts(List<WebElement> listOfEl) {

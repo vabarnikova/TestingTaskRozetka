@@ -2,7 +2,6 @@ package pages;
 
 import core.WebDriverSettings;
 import core.WebDriverWaits;
-import logging.WebDriverLogs;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,7 +17,7 @@ public class SignInPage extends AuthorizationPage {
 
     public SignInPage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
-        log = WebDriverLogs.writeLogs(getClass());
+        log = Logger.getLogger(CoffeePage.class.getName());
         log.info("** Open SignIn Page **");
     }
 
@@ -60,6 +59,7 @@ public class SignInPage extends AuthorizationPage {
 
     public SignInPage clickToSubmit() {
         log.info("Click to submit data");
+        log.info("Test can fail periodically because of captcha");
         submitButton.click();
         return this;
     }
