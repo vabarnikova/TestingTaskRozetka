@@ -1,7 +1,6 @@
 package pages;
 
 import core.WebDriverSettings;
-import logging.WebDriverLogs;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,7 +17,7 @@ public class BasePage extends ProductPage {
 
     public BasePage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
-        log = WebDriverLogs.writeLogs(getClass());
+        log = Logger.getLogger(CoffeePage.class.getName());
         log.info("** Open Base Page **");
     }
 

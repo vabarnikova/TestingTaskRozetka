@@ -1,7 +1,6 @@
 package pages;
 
 import core.WebDriverSettings;
-import logging.WebDriverLogs;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -16,7 +15,7 @@ public class AlcoholPage {
 
     public AlcoholPage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
-        log = WebDriverLogs.writeLogs(getClass());
+        log = Logger.getLogger(CoffeePage.class.getName());
         log.info("** Open Alcohol Page **");
     }
 

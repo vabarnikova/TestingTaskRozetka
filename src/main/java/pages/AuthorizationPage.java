@@ -1,6 +1,5 @@
 package pages;
 
-import logging.WebDriverLogs;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 
@@ -10,7 +9,7 @@ public class AuthorizationPage {
     private Logger log;
 
     public AuthorizationPage(){
-        log = WebDriverLogs.writeLogs(getClass());
+        log = Logger.getLogger(CoffeePage.class.getName());
     }
 
     public String getIncorrectFieldColor(WebElement field) {
