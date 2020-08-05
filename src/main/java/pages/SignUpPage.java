@@ -1,5 +1,6 @@
 package pages;
 
+import core.Utils;
 import core.WebDriverSettings;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.logging.Logger;
 
 
-public class SignUpPage extends AuthorizationPage {
+public class SignUpPage {
 
     private String incorrectColor;
     private Logger log;
@@ -38,25 +39,18 @@ public class SignUpPage extends AuthorizationPage {
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='username']//following-sibling::form-error/p")
     private WebElement errorMsgEmail;
 
-
-    public SignUpPage inputUserName(String name) {
+    public SignUpPage inputAuthKeys(String name, String email, String password) {
         log.info("Input empty user name: " + name);
         userName.clear();
         userName.sendKeys(name);
-        return this;
-    }
-
-    public SignUpPage inputUserEmail(String email) {
         log.info("Input user email: " + email);
         userEmail.clear();
         userEmail.sendKeys(email);
-        return this;
-    }
-
-    public SignUpPage inputUserPswd(String pswd) {
-        log.info("Input user password: " + pswd);
+        log.info("Input user password: " + password);
         userPassword.clear();
-        userPassword.sendKeys(pswd);
+        userPassword.sendKeys(password);
+        log.info("Click to register");
+        registration.click();
         return this;
     }
 
@@ -67,7 +61,7 @@ public class SignUpPage extends AuthorizationPage {
     }
 
     public String getIncorrectPasswdField() {
-        return incorrectColor = this.getIncorrectFieldColor(userPassword);
+        return incorrectColor = Utils.getIncorrectFieldColor(userPassword);
     }
 
     public String getErrorNameMessage() {

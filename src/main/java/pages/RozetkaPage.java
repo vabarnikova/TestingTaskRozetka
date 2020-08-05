@@ -1,5 +1,6 @@
 package pages;
 
+import core.Utils;
 import core.WebDriverSettings;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -11,11 +12,11 @@ import java.util.List;
 import java.util.logging.Logger;
 
 
-public class BasePage extends ProductPage {
+public class RozetkaPage extends ProductPage {
     private List<String> actualListOfProd;
     private Logger log;
 
-    public BasePage() {
+    public RozetkaPage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
         log = Logger.getLogger(CoffeePage.class.getName());
         log.info("** Open Base Page **");
@@ -45,7 +46,7 @@ public class BasePage extends ProductPage {
 
     public List<String> checkListOfItems() {
         log.info("Checking that list of items contains word");
-        actualListOfProd = this.verifyListOfProducts(listOfgoods);
+        actualListOfProd = Utils.getListOfProducts(listOfgoods);
         return actualListOfProd;
     }
 

@@ -2,18 +2,18 @@ import core.WebDriverSettings;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pages.BasePage;
+import pages.RozetkaPage;
 
 import java.util.List;
 
-public class BaseTest extends WebDriverSettings {
+public class RozetkaTest extends WebDriverSettings {
 
-    protected BasePage mainPage;
+    protected RozetkaPage mainPage;
     private List<String> listOfLaptops;
 
     @BeforeClass
     public void Initial() {
-        mainPage = new BasePage();
+        mainPage = new RozetkaPage();
     }
 
     @Test
