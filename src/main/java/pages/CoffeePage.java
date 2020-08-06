@@ -1,5 +1,6 @@
 package pages;
 
+import core.Utils;
 import core.WebDriverSettings;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -64,13 +65,12 @@ public class CoffeePage extends ProductPage {
 
     public String checkTitleCoffee() {
         log.info("Checking Coffee Page title");
-        String expTitle = titleCoffee.getText();
-        return expTitle;
+        return titleCoffee.getText();
     }
 
     public List<String> checkListOfItems() {
         log.info("Checking that list of coffee contains word");
-        actualListOfItems = this.verifyListOfProducts(listOfCoffee);
+        actualListOfItems = Utils.getListOfProducts(listOfCoffee);
         return actualListOfItems;
     }
 }

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.logging.Logger;
 
 
-public class AlcoholPage {
+public class AlcoholPage extends ProductPage {
 
     protected Logger log;
 
@@ -27,8 +27,7 @@ public class AlcoholPage {
 
     public String verifyAlcoholTitle() {
         log.info("Checking Alcohol Page title");
-        String expTitle = heading.getText();
-        return expTitle;
+        return heading.getText();
     }
 
     public CoffeePage clickCoffee() {

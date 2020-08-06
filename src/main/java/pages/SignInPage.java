@@ -1,5 +1,6 @@
 package pages;
 
+import core.Utils;
 import core.WebDriverSettings;
 import core.WebDriverWaits;
 import org.openqa.selenium.By;
@@ -8,9 +9,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
 import java.util.logging.Logger;
 
-public class SignInPage extends AuthorizationPage {
+public class SignInPage {
 
     String incorrectColor;
     private Logger log;
@@ -33,6 +35,9 @@ public class SignInPage extends AuthorizationPage {
     @FindBy(how = How.XPATH, using = "//button[contains(@class,'auth-modal__submit')]")
     private WebElement submitButton;
 
+    @FindBy(how = How.XPATH, using = "//div[@class='auth-modal__captcha']")
+    private List<WebElement> captcha;
+
 
     public String getAuthorizedUserName(String name) {
         log.info("Checking that authorization is correct");
@@ -43,33 +48,29 @@ public class SignInPage extends AuthorizationPage {
         return userName;
     }
 
-    public SignInPage inputEmail(String email) {
+    public void getCaptcha(){
+        if(captcha.size()>0)
+            log.info("Test can fail periodically because of captcha");
+    }
+
+    public SignInPage inputAuthKeys(String email,String password){
         log.info("Input user email: " + email);
         userEmail.clear();
         userEmail.sendKeys(email);
-        return this;
-    }
-
-    public SignInPage inputPassword(String password) {
         log.info("Input user password: " + password);
         userPassword.clear();
         userPassword.sendKeys(password);
-        return this;
-    }
-
-    public SignInPage clickToSubmit() {
         log.info("Click to submit data");
-        log.info("Test can fail periodically because of captcha");
         submitButton.click();
         return this;
     }
 
     public String getIncorrectEmailField() {
-        return incorrectColor = this.getIncorrectFieldColor(userEmail);
+        return incorrectColor = Utils.getIncorrectFieldColor(userEmail);
     }
 
     public String getIncorrectPasswdField() {
-        return incorrectColor = this.getIncorrectFieldColor(userPassword);
+        return incorrectColor = Utils.getIncorrectFieldColor(userPassword);
     }
 
     public SignUpPage goToSignUp() {
