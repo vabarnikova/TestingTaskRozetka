@@ -13,9 +13,10 @@ public class SignUpTest extends WebDriverSettings {
 
     @BeforeClass
     public void Init() {
+        WebDriverSettings.getDriver().get(data.getLinkToRozetkaPage());
         mainPage = new RozetkaPage();
-        signInPage = mainPage.goToSignIn();
-        signUpPage = signInPage.goToSignUp();
+        signInPage = mainPage.openSignIn();
+        signUpPage = signInPage.openSignUp();
 
     }
 

@@ -6,10 +6,10 @@ import org.openqa.selenium.WebElement;
 
 import java.util.logging.Logger;
 
-public class ProductPage {
-    private Logger log;
+public abstract class BasePage {
+    protected Logger log;
 
-    public ProductPage() {
+    public BasePage() {
         log = Logger.getLogger(CoffeePage.class.getName());
     }
 

@@ -1,23 +1,17 @@
 package pages;
 
-import core.Utils;
 import core.WebDriverSettings;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import utils.ElementsUtils;
 
-import java.util.logging.Logger;
 
-
-public class SignUpPage {
-
-    private String incorrectColor;
-    private Logger log;
+public class SignUpPage extends BasePage {
 
     public SignUpPage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
-        log = Logger.getLogger(CoffeePage.class.getName());
         log.info("** Open SignUp Page **");
     }
 
@@ -54,14 +48,13 @@ public class SignUpPage {
         return this;
     }
 
-    public SignUpPage clickToRegistration() {
+    public void clickToRegistration() {
         log.info("Click to register");
         registration.click();
-        return this;
     }
 
     public String getIncorrectPasswdField() {
-        return incorrectColor = Utils.getIncorrectFieldColor(userPassword);
+        return ElementsUtils.getIncorrectFieldColor(userPassword);
     }
 
     public String getErrorNameMessage() {

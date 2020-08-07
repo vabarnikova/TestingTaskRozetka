@@ -1,6 +1,5 @@
 package pages;
 
-import core.Utils;
 import core.WebDriverSettings;
 import core.WebDriverWaits;
 import org.openqa.selenium.By;
@@ -8,18 +7,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import utils.ElementsUtils;
 
 import java.util.List;
-import java.util.logging.Logger;
 
-public class SignInPage {
-
-    String incorrectColor;
-    private Logger log;
+public class SignInPage extends BasePage {
 
     public SignInPage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
-        log = Logger.getLogger(CoffeePage.class.getName());
         log.info("** Open SignIn Page **");
     }
 
@@ -48,12 +43,12 @@ public class SignInPage {
         return userName;
     }
 
-    public void getCaptcha(){
-        if(captcha.size()>0)
+    public void getCaptcha() {
+        if (captcha.size() > 0)
             log.info("Test can fail periodically because of captcha");
     }
 
-    public SignInPage inputAuthKeys(String email,String password){
+    public SignInPage inputAuthKeys(String email, String password) {
         log.info("Input user email: " + email);
         userEmail.clear();
         userEmail.sendKeys(email);
@@ -66,14 +61,14 @@ public class SignInPage {
     }
 
     public String getIncorrectEmailField() {
-        return incorrectColor = Utils.getIncorrectFieldColor(userEmail);
+        return ElementsUtils.getIncorrectFieldColor(userEmail);
     }
 
     public String getIncorrectPasswdField() {
-        return incorrectColor = Utils.getIncorrectFieldColor(userPassword);
+        return ElementsUtils.getIncorrectFieldColor(userPassword);
     }
 
-    public SignUpPage goToSignUp() {
+    public SignUpPage openSignUp() {
         WebDriverWaits.waitForPresentEl(registration);
         registration.click();
         return new SignUpPage();

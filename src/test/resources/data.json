@@ -1,8 +1,8 @@
 {
   "alcoholTitle": "Алкогольные напитки и продукты",
   "coffeeTitle": "Кофе",
-  "searchLaptop": "ноутбук",
-  "oneOptionContainsListOfLaptops": "Apple",
+  "searchLaptop": "лодка",
+  "oneOptionContainsListOfLaptops": "Bark",
   "userEmail": "body@gmail.com",
   "validUserEmail": "n.mykola@gmail.com",
   "userPassword": "5g6hsm89",
@@ -10,8 +10,13 @@
   "userName": "some",
   "validAuthUserName": "Николай",
   "errorColor": "#ffffff",
-  "oneOptionContainsListOfCoffee": "Ambassador",
+  "firstOptionContainsListOfCoffee": "Ambassador",
+  "secondOptionContainsListOfCoffee": "В зернах",
   "twoOptionsContainListOfCoffee": "кофе в зернах ambassador",
   "errorMsgName": "Введите свое имя на кириллице",
-  "errorMsgEmail": "Введите свою эл. почту"
+  "errorMsgEmail": "Введите свою эл. почту",
+  "linkToRozetkaPage": "http://rozetka.com.ua/",
+  "linkToAlcoholPage": "https://rozetka.com.ua/alkoholnie-napitki-i-produkty/c4626923/",
+  "linkToCoffeePage": "https://rozetka.com.ua/koffee/c4625011/"
 }
+

@@ -1,22 +1,19 @@
 package pages;
 
-import core.Utils;
 import core.WebDriverSettings;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import utils.ElementsUtils;
 
 import java.util.List;
-import java.util.logging.Logger;
 
-public class CoffeePage extends ProductPage {
+public class CoffeePage extends BasePage {
     private List<String> actualListOfItems;
-    private Logger log;
 
     public CoffeePage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
-        log = Logger.getLogger(CoffeePage.class.getName());
         log.info("** Open Coffee Page **");
     }
 
@@ -37,7 +34,6 @@ public class CoffeePage extends ProductPage {
 
     @FindBy(how = How.XPATH, using = "//div[@class='cart-product']")
     private List<WebElement> productsInBasket;
-
 
     public void clickOnCheckbox(String optionName) {
         this.clickOnPageCheckbox(optionName, "//input[@id='%s']/following-sibling::label");
@@ -63,14 +59,13 @@ public class CoffeePage extends ProductPage {
         return productsInBasket.size() > 0;
     }
 
-    public String checkTitleCoffee() {
+    public String getTitleCoffee() {
         log.info("Checking Coffee Page title");
         return titleCoffee.getText();
     }
 
-    public List<String> checkListOfItems() {
+    public boolean checkListOfItems(String word) {
         log.info("Checking that list of coffee contains word");
-        actualListOfItems = Utils.getListOfProducts(listOfCoffee);
-        return actualListOfItems;
+        return ElementsUtils.getListOfProducts(listOfCoffee, word);
     }
 }

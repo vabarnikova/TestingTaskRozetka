@@ -11,20 +11,21 @@ public class AlcoholTest extends WebDriverSettings {
 
     @BeforeClass
     public void init() {
+        WebDriverSettings.getDriver().get(data.getLinkToAlcoholPage());
         alcoholPage = new AlcoholPage();
     }
 
     @Test
     public void titleCheckingTest() {
-        String titleAlcohol = alcoholPage.verifyAlcoholTitle();
+        String titleAlcohol = alcoholPage.getAlcoholTitle();
         Assert.assertEquals(data.getAlcoholTitle(), titleAlcohol,
                 "-- Failed. Actual alcoholTitle isn't equal expected alcoholTitle --");
     }
 
     @Test
     public void titleCoffeeTest() {
-        coffeePage = alcoholPage.clickCoffee();
-        String titleCoffee = coffeePage.checkTitleCoffee();
+        coffeePage = alcoholPage.openCoffee();
+        String titleCoffee = coffeePage.getTitleCoffee();
         Assert.assertEquals(titleCoffee, data.getCoffeeTitle(),
                 "-- Failed. Actual coffeeTitle isn't equal expected coffeeTitle --");
     }
