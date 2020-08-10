@@ -1,10 +1,12 @@
 package core;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import parse.DataForTesting;
 import parse.ParsingData;
 
@@ -20,10 +22,13 @@ public class WebDriverSettings {
     }
 
     @BeforeClass
-    public void setUp() {
+    @Parameters("navigateTo")
+    @Step("Open url: {0} ")
+    public void setUp(String navigateTo) {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.get(navigateTo);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
         parsingData = new ParsingData();
@@ -31,6 +36,7 @@ public class WebDriverSettings {
     }
 
     @AfterClass
+    @Step("Quit tests")
     public void tearDown() {
         driver.quit();
     }

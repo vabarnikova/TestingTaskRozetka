@@ -20,7 +20,4 @@ public class DataForTesting {
     private String validUserPassword;
     private String validAuthUserName;
     private String oneOptionContainsListOfLaptops;
-    private String linkToRozetkaPage;
-    private String linkToAlcoholPage;
-    private String linkToCoffeePage;
 }

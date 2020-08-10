@@ -1,6 +1,7 @@
 package pages;
 
 import core.WebDriverSettings;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -33,6 +34,7 @@ public class SignUpPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='username']//following-sibling::form-error/p")
     private WebElement errorMsgEmail;
 
+    @Step("Login step with name: {0}, email: {1}, password: {2}")
     public SignUpPage inputAuthKeys(String name, String email, String password) {
         log.info("Input empty user name: " + name);
         userName.clear();
@@ -48,24 +50,26 @@ public class SignUpPage extends BasePage {
         return this;
     }
 
+    @Step("Click on registration button")
     public void clickToRegistration() {
         log.info("Click to register");
         registration.click();
     }
 
+    @Step("Get incorrect color of password field")
     public String getIncorrectPasswdField() {
         return ElementsUtils.getIncorrectFieldColor(userPassword);
     }
 
+    @Step("Get error username message")
     public String getErrorNameMessage() {
         log.info("Checking that error message is correct");
-        String msg = errorMsgName.getText();
-        return msg;
+        return errorMsgName.getText();
     }
 
+    @Step("Get error email message")
     public String getErrorEmailMessage() {
-        String msg = errorMsgEmail.getText();
-        return msg;
+        return errorMsgEmail.getText();
     }
 
 }

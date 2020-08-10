@@ -1,32 +1,31 @@
 import core.WebDriverSettings;
+import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.AlcoholPage;
 import pages.CoffeePage;
 
+@Feature("Alcohol page Tests")
 public class AlcoholTest extends WebDriverSettings {
     protected AlcoholPage alcoholPage;
     protected CoffeePage coffeePage;
 
     @BeforeClass
     public void init() {
-        WebDriverSettings.getDriver().get(data.getLinkToAlcoholPage());
         alcoholPage = new AlcoholPage();
     }
 
-    @Test
-    public void titleCheckingTest() {
-        String titleAlcohol = alcoholPage.getAlcoholTitle();
-        Assert.assertEquals(data.getAlcoholTitle(), titleAlcohol,
+    @Test(description = "Alcohol page title verification")
+    public void checkingAlcoholTitleTest() {
+        Assert.assertEquals(data.getAlcoholTitle(), alcoholPage.getAlcoholTitle(),
                 "-- Failed. Actual alcoholTitle isn't equal expected alcoholTitle --");
     }
 
-    @Test
-    public void titleCoffeeTest() {
+    @Test(description = "Coffee page title verification")
+    public void checkingCoffeeTitleTest() {
         coffeePage = alcoholPage.openCoffee();
-        String titleCoffee = coffeePage.getTitleCoffee();
-        Assert.assertEquals(titleCoffee, data.getCoffeeTitle(),
+        Assert.assertEquals(coffeePage.getTitleCoffee(), data.getCoffeeTitle(),
                 "-- Failed. Actual coffeeTitle isn't equal expected coffeeTitle --");
     }
 }

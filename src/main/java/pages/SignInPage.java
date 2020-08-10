@@ -2,6 +2,7 @@ package pages;
 
 import core.WebDriverSettings;
 import core.WebDriverWaits;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,21 +34,22 @@ public class SignInPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='auth-modal__captcha']")
     private List<WebElement> captcha;
 
-
+    @Step("Get authorized username: {1}")
     public String getAuthorizedUserName(String name) {
         log.info("Checking that authorization is correct");
         String userNameXpath = String.format("//p[@class='header-topline__user-text']/a[text()[contains(.,'%s')]]", name);
         By authorizedUserPage = By.xpath(userNameXpath);
         WebElement webUserName = WebDriverSettings.getDriver().findElement(authorizedUserPage);
-        String userName = webUserName.getText();
-        return userName;
+        return webUserName.getText();
     }
 
-    public void getCaptcha() {
+    @Step("Verify form contains captcha")
+    public void formContainsCaptcha() {
         if (captcha.size() > 0)
             log.info("Test can fail periodically because of captcha");
     }
 
+    @Step("Login step with email: {0}, password: {1}")
     public SignInPage inputAuthKeys(String email, String password) {
         log.info("Input user email: " + email);
         userEmail.clear();
@@ -60,14 +62,17 @@ public class SignInPage extends BasePage {
         return this;
     }
 
+    @Step("Get incorrect color of email field")
     public String getIncorrectEmailField() {
         return ElementsUtils.getIncorrectFieldColor(userEmail);
     }
 
+    @Step("Get incorrect color of password field")
     public String getIncorrectPasswdField() {
         return ElementsUtils.getIncorrectFieldColor(userPassword);
     }
 
+    @Step("Click on registration button and open SignUpPage")
     public SignUpPage openSignUp() {
         WebDriverWaits.waitForPresentEl(registration);
         registration.click();

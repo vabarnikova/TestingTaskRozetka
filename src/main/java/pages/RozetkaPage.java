@@ -1,6 +1,7 @@
 package pages;
 
 import core.WebDriverSettings;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,6 +34,7 @@ public class RozetkaPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//ul[contains(@class,'menu-categories_type_main')]//a[contains(@href, 'alkoholnie')]")
     private WebElement item;
 
+    @Step("Click on search and input searchWord: {0}")
     public void clickRozetkaSearch(String searchWord) {
         log.info("Pass word " + searchWord + " to search string");
         inpSearch.clear();
@@ -41,6 +43,7 @@ public class RozetkaPage extends BasePage {
         inpSearch.sendKeys(Keys.ENTER);
     }
 
+    @Step("Checking that list of items contains word: {0}")
     public boolean checkListOfItems(String word) {
         log.info("Checking that list of items contains word");
         return ElementsUtils.getListOfProducts(listOfgoods, word);
@@ -50,6 +53,7 @@ public class RozetkaPage extends BasePage {
         this.clickOnPageCheckbox(optionName, "//input[@id='%s']/following-sibling::label");
     }
 
+    @Step("Open Login page")
     public SignInPage openSignIn() {
         userLink.click();
         return new SignInPage();
