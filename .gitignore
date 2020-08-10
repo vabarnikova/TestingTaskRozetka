@@ -3,4 +3,5 @@
 *.iws
 log/
 target/
+allure-results/
 *.DS_Store
