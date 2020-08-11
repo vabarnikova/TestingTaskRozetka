@@ -1,4 +1,5 @@
 import core.WebDriverSettings;
+import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -21,7 +22,8 @@ public class SignUpTest extends WebDriverSettings {
 
     }
 
-    @Test(description = "Invalid Login Scenario with empty username")
+    @Test
+    @Description("Invalid Login Scenario with empty username")
     public void emptyNameSignUp() {
         signUpPage.inputAuthKeys("", data.getUserEmail(), data.getUserPassword())
                 .clickToRegistration();
@@ -29,7 +31,8 @@ public class SignUpTest extends WebDriverSettings {
         Assert.assertEquals(msg, data.getErrorMsgName(), "-- Failed. Because error message is not " + data.getErrorMsgName() + " -- \n");
     }
 
-    @Test(description = "Invalid Login Scenario with empty email")
+    @Test
+    @Description("Invalid Login Scenario with empty email")
     public void emptyEmailSignUp() {
         signUpPage.inputAuthKeys(data.getUserName(), "", data.getUserPassword())
                 .clickToRegistration();
@@ -37,7 +40,8 @@ public class SignUpTest extends WebDriverSettings {
         Assert.assertEquals(msg, data.getErrorMsgEmail(), "-- Failed. Because error message is not " + data.getErrorMsgEmail() + " -- \n");
     }
 
-    @Test(description = "Invalid Login Scenario with empty password")
+    @Test
+    @Description("Invalid Login Scenario with empty password")
     public void emptyPasswordSignUp() {
         signUpPage.inputAuthKeys(data.getUserName(), data.getUserEmail(), "")
                 .clickToRegistration();

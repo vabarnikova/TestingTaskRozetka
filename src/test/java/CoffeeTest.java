@@ -1,4 +1,5 @@
 import core.WebDriverSettings;
+import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -14,19 +15,22 @@ public class CoffeeTest extends WebDriverSettings {
         coffeePage = new CoffeePage();
     }
 
-    @Test(description = "Verify coffee list contains the selected option")
+    @Test
+    @Description("Verify coffee list contains the selected option")
     public void containsOptionTest() {
         coffeePage.clickOnCheckbox(data.getFirstOptionContainsListOfCoffee());
         Assert.assertTrue(coffeePage.checkListOfItems(data.getFirstOptionContainsListOfCoffee()));
     }
 
-    @Test(description = "Verify coffee list contains selected options")
+    @Test
+    @Description("Verify coffee list contains selected options")
     public void containsOptionsTest() {
         coffeePage.clickOnCheckbox(data.getSecondOptionContainsListOfCoffee());
         Assert.assertTrue(coffeePage.checkListOfItems(data.getTwoOptionsContainListOfCoffee()));
     }
 
-    @Test(description = "Verify basket contains the selected product")
+    @Test
+    @Description("Verify basket contains the selected product")
     public void containsProductInBasket() {
         coffeePage.clickOnItem();
         coffeePage.clickOnButtonBuy();

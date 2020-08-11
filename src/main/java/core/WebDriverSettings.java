@@ -22,8 +22,8 @@ public class WebDriverSettings {
     }
 
     @BeforeClass
-    @Parameters("navigateTo")
     @Step("Open url: {0} ")
+    @Parameters("navigateTo")
     public void setUp(String navigateTo) {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();

@@ -1,4 +1,5 @@
 import core.WebDriverSettings;
+import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -15,13 +16,15 @@ public class RozetkaTest extends WebDriverSettings {
         mainPage = new RozetkaPage();
     }
 
-    @Test(description = "Verify list of products contains search word")
+    @Test
+    @Description("Verify list of products contains search word")
     public void containsWordTest() {
         mainPage.clickRozetkaSearch(data.getSearchLaptop());
         Assert.assertTrue(mainPage.checkListOfItems(data.getSearchLaptop()));
     }
 
-    @Test(description = "Verify list of products contains the selected option")
+    @Test
+    @Description("Verify list of products contains the selected option")
     public void containsWordOptionTest() {
         mainPage.clickRozetkaSearch(data.getSearchLaptop());
         mainPage.clickOnCheckbox(data.getOneOptionContainsListOfLaptops());

@@ -1,4 +1,5 @@
 import core.WebDriverSettings;
+import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -16,13 +17,15 @@ public class AlcoholTest extends WebDriverSettings {
         alcoholPage = new AlcoholPage();
     }
 
-    @Test(description = "Alcohol page title verification")
+    @Test
+    @Description("Alcohol page title verification")
     public void checkingAlcoholTitleTest() {
         Assert.assertEquals(data.getAlcoholTitle(), alcoholPage.getAlcoholTitle(),
                 "-- Failed. Actual alcoholTitle isn't equal expected alcoholTitle --");
     }
 
-    @Test(description = "Coffee page title verification")
+    @Test
+    @Description("Coffee page title verification")
     public void checkingCoffeeTitleTest() {
         coffeePage = alcoholPage.openCoffee();
         Assert.assertEquals(coffeePage.getTitleCoffee(), data.getCoffeeTitle(),

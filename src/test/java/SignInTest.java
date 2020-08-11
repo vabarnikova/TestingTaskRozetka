@@ -1,4 +1,5 @@
 import core.WebDriverSettings;
+import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -17,21 +18,24 @@ public class SignInTest extends WebDriverSettings {
         signInPage = mainPage.openSignIn();
     }
 
-    @Test(description = "Invalid Login Scenario with empty password")
+    @Test
+    @Description("Invalid Login Scenario with empty password")
     public void emptyPasswordTest() {
         signInPage.inputAuthKeys(data.getUserEmail(), "");
         String color = signInPage.getIncorrectPasswdField();
         Assert.assertTrue(color != data.getErrorColor(), "-- Failed. Because input colour is white -- \n");
     }
 
-    @Test(description = "Invalid Login Scenario with empty email")
+    @Test
+    @Description("Invalid Login Scenario with empty email")
     public void emptyEmailTest() {
         signInPage.inputAuthKeys("", data.getUserPassword());
         String color = signInPage.getIncorrectEmailField();
         Assert.assertTrue(color != data.getErrorColor(), "-- Failed. Because input colour is white -- \n");
     }
 
-    @Test(description = "Verify authentication was successful")
+    @Test
+    @Description("Verify authentication was successful")
     public void successfulAuthorization() {
         signInPage.inputAuthKeys(data.getValidUserEmail(), data.getValidUserPassword())
                 .formContainsCaptcha();
