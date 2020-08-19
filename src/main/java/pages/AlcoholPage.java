@@ -1,21 +1,17 @@
 package pages;
 
 import core.WebDriverSettings;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.logging.Logger;
 
-
-public class AlcoholPage extends ProductPage {
-
-    protected Logger log;
+public class AlcoholPage extends BasePage {
 
     public AlcoholPage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
-        log = Logger.getLogger(CoffeePage.class.getName());
         log.info("** Open Alcohol Page **");
     }
 
@@ -25,12 +21,14 @@ public class AlcoholPage extends ProductPage {
     @FindBy(how = How.XPATH, using = "//li[@class='tile-cats__item']/a[@title='Кофе']")
     private WebElement coffeeButton;
 
-    public String verifyAlcoholTitle() {
+    @Step("Get Alcohol page title")
+    public String getAlcoholTitle() {
         log.info("Checking Alcohol Page title");
         return heading.getText();
     }
 
-    public CoffeePage clickCoffee() {
+    @Step("Open Coffee page")
+    public CoffeePage openCoffee() {
         log.info("Click on Coffee Page link");
         coffeeButton.click();
         return new CoffeePage();

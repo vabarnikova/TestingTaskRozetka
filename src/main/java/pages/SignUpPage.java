@@ -1,23 +1,18 @@
 package pages;
 
-import core.Utils;
 import core.WebDriverSettings;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import utils.ElementsUtils;
 
-import java.util.logging.Logger;
 
-
-public class SignUpPage {
-
-    private String incorrectColor;
-    private Logger log;
+public class SignUpPage extends BasePage {
 
     public SignUpPage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
-        log = Logger.getLogger(CoffeePage.class.getName());
         log.info("** Open SignUp Page **");
     }
 
@@ -39,6 +34,7 @@ public class SignUpPage {
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='username']//following-sibling::form-error/p")
     private WebElement errorMsgEmail;
 
+    @Step("Login step with name: {0}, email: {1}, password: {2}")
     public SignUpPage inputAuthKeys(String name, String email, String password) {
         log.info("Input empty user name: " + name);
         userName.clear();
@@ -54,25 +50,26 @@ public class SignUpPage {
         return this;
     }
 
-    public SignUpPage clickToRegistration() {
+    @Step("Click on registration button")
+    public void clickToRegistration() {
         log.info("Click to register");
         registration.click();
-        return this;
     }
 
+    @Step("Get incorrect color of password field")
     public String getIncorrectPasswdField() {
-        return incorrectColor = Utils.getIncorrectFieldColor(userPassword);
+        return ElementsUtils.getIncorrectFieldColor(userPassword);
     }
 
+    @Step("Get error username message")
     public String getErrorNameMessage() {
         log.info("Checking that error message is correct");
-        String msg = errorMsgName.getText();
-        return msg;
+        return errorMsgName.getText();
     }
 
+    @Step("Get error email message")
     public String getErrorEmailMessage() {
-        String msg = errorMsgEmail.getText();
-        return msg;
+        return errorMsgEmail.getText();
     }
 
 }

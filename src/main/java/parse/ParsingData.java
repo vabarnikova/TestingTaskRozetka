@@ -12,7 +12,7 @@ public class ParsingData {
         ObjectMapper objectMapper = new ObjectMapper();
         DataForTesting data = null;
         try {
-            data = objectMapper.readValue(new File("src/main/resources/data.json"),
+            data = objectMapper.readValue(new File("src/test/resources/data.json"),
                     DataForTesting.class);
         } catch (IOException e) {
             e.printStackTrace();

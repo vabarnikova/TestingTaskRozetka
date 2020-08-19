@@ -1,24 +1,21 @@
 package pages;
 
-import core.Utils;
 import core.WebDriverSettings;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import utils.ElementsUtils;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 
-public class RozetkaPage extends ProductPage {
-    private List<String> actualListOfProd;
-    private Logger log;
+public class RozetkaPage extends BasePage {
 
     public RozetkaPage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
-        log = Logger.getLogger(CoffeePage.class.getName());
         log.info("** Open Base Page **");
     }
 
@@ -37,24 +34,27 @@ public class RozetkaPage extends ProductPage {
     @FindBy(how = How.XPATH, using = "//ul[contains(@class,'menu-categories_type_main')]//a[contains(@href, 'alkoholnie')]")
     private WebElement item;
 
+    @Step("Click on search and input searchWord: {0}")
     public void clickRozetkaSearch(String searchWord) {
         log.info("Pass word " + searchWord + " to search string");
+        inpSearch.clear();
         inpSearch.sendKeys(searchWord);
         log.info("Click ENTER");
         inpSearch.sendKeys(Keys.ENTER);
     }
 
-    public List<String> checkListOfItems() {
+    @Step("Checking that list of items contains word: {0}")
+    public boolean checkListOfItems(String word) {
         log.info("Checking that list of items contains word");
-        actualListOfProd = Utils.getListOfProducts(listOfgoods);
-        return actualListOfProd;
+        return ElementsUtils.getListOfProducts(listOfgoods, word);
     }
 
     public void clickOnCheckbox(String optionName) {
         this.clickOnPageCheckbox(optionName, "//input[@id='%s']/following-sibling::label");
     }
 
-    public SignInPage goToSignIn() {
+    @Step("Open Login page")
+    public SignInPage openSignIn() {
         userLink.click();
         return new SignInPage();
     }

@@ -1,25 +1,21 @@
 package pages;
 
-import core.Utils;
 import core.WebDriverSettings;
 import core.WebDriverWaits;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import utils.ElementsUtils;
 
 import java.util.List;
-import java.util.logging.Logger;
 
-public class SignInPage {
-
-    String incorrectColor;
-    private Logger log;
+public class SignInPage extends BasePage {
 
     public SignInPage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
-        log = Logger.getLogger(CoffeePage.class.getName());
         log.info("** Open SignIn Page **");
     }
 
@@ -38,22 +34,23 @@ public class SignInPage {
     @FindBy(how = How.XPATH, using = "//div[@class='auth-modal__captcha']")
     private List<WebElement> captcha;
 
-
+    @Step("Get authorized username: {1}")
     public String getAuthorizedUserName(String name) {
         log.info("Checking that authorization is correct");
         String userNameXpath = String.format("//p[@class='header-topline__user-text']/a[text()[contains(.,'%s')]]", name);
         By authorizedUserPage = By.xpath(userNameXpath);
         WebElement webUserName = WebDriverSettings.getDriver().findElement(authorizedUserPage);
-        String userName = webUserName.getText();
-        return userName;
+        return webUserName.getText();
     }
 
-    public void getCaptcha(){
-        if(captcha.size()>0)
+    @Step("Verify form contains captcha")
+    public void formContainsCaptcha() {
+        if (captcha.size() > 0)
             log.info("Test can fail periodically because of captcha");
     }
 
-    public SignInPage inputAuthKeys(String email,String password){
+    @Step("Login step with email: {0}, password: {1}")
+    public SignInPage inputAuthKeys(String email, String password) {
         log.info("Input user email: " + email);
         userEmail.clear();
         userEmail.sendKeys(email);
@@ -65,15 +62,18 @@ public class SignInPage {
         return this;
     }
 
+    @Step("Get incorrect color of email field")
     public String getIncorrectEmailField() {
-        return incorrectColor = Utils.getIncorrectFieldColor(userEmail);
+        return ElementsUtils.getIncorrectFieldColor(userEmail);
     }
 
+    @Step("Get incorrect color of password field")
     public String getIncorrectPasswdField() {
-        return incorrectColor = Utils.getIncorrectFieldColor(userPassword);
+        return ElementsUtils.getIncorrectFieldColor(userPassword);
     }
 
-    public SignUpPage goToSignUp() {
+    @Step("Click on registration button and open SignUpPage")
+    public SignUpPage openSignUp() {
         WebDriverWaits.waitForPresentEl(registration);
         registration.click();
         return new SignUpPage();

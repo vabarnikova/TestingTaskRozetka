@@ -1,22 +1,19 @@
 package pages;
 
-import core.Utils;
 import core.WebDriverSettings;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import utils.ElementsUtils;
 
 import java.util.List;
-import java.util.logging.Logger;
 
-public class CoffeePage extends ProductPage {
-    private List<String> actualListOfItems;
-    private Logger log;
+public class CoffeePage extends BasePage {
 
     public CoffeePage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
-        log = Logger.getLogger(CoffeePage.class.getName());
         log.info("** Open Coffee Page **");
     }
 
@@ -38,39 +35,43 @@ public class CoffeePage extends ProductPage {
     @FindBy(how = How.XPATH, using = "//div[@class='cart-product']")
     private List<WebElement> productsInBasket;
 
-
     public void clickOnCheckbox(String optionName) {
         this.clickOnPageCheckbox(optionName, "//input[@id='%s']/following-sibling::label");
     }
 
+    @Step("Click on coffee product")
     public void clickOnItem() {
         log.info("Click on coffee product");
         coffeeItem.click();
     }
 
+    @Step("Click on buy button")
     public void clickOnButtonBuy() {
         log.info("Click on button \"Купить\"");
         buttonBuy.click();
     }
 
+    @Step("Click on basket button")
     public void clickOnButtonBasket() {
         log.info("Click on button \"Корзина\"");
         buttonBasket.click();
     }
 
+    @Step("Verify basket contains product")
     public boolean isContainsProducts() {
         log.info("Checking that basket contains products");
         return productsInBasket.size() > 0;
     }
 
-    public String checkTitleCoffee() {
+    @Step("Get coffee title")
+    public String getTitleCoffee() {
         log.info("Checking Coffee Page title");
         return titleCoffee.getText();
     }
 
-    public List<String> checkListOfItems() {
+    @Step("Verify list of coffee contains word: {0}")
+    public boolean checkListOfItems(String word) {
         log.info("Checking that list of coffee contains word");
-        actualListOfItems = Utils.getListOfProducts(listOfCoffee);
-        return actualListOfItems;
+        return ElementsUtils.getListOfProducts(listOfCoffee, word);
     }
 }

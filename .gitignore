@@ -3,4 +3,10 @@
 *.iws
 log/
 target/
+allure-results/
 *.DS_Store
+gradlew
+gradlew.bat
+.gradle/
+/build/
+
