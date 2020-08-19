@@ -8,6 +8,8 @@ import java.util.List;
 
 public class ElementsUtils {
 
+    private ElementsUtils(){}
+
     public static boolean getListOfProducts(List<WebElement> listOfEl, String word) {
         WebDriverWaits.waitForPresentEl(listOfEl);
         return listOfEl.stream().allMatch(el -> el.getText().toLowerCase().contains(word.toLowerCase()));
