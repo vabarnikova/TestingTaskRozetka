@@ -1,6 +1,7 @@
 package core;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
@@ -21,6 +22,7 @@ public class WebDriverSettings {
     }
 
     @BeforeClass
+    @Step("Open url: {0} ")
     @Parameters("navigateTo")
     public void setUp(String navigateTo) {
         WebDriverManager.chromedriver().setup();
@@ -34,6 +36,7 @@ public class WebDriverSettings {
     }
 
     @AfterClass
+    @Step("Quit tests")
     public void tearDown() {
         driver.quit();
     }

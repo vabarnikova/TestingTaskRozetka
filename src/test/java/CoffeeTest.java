@@ -1,14 +1,14 @@
 import core.WebDriverSettings;
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.CoffeePage;
 
-import java.util.List;
-
+@Feature("Coffee page Tests")
 public class CoffeeTest extends WebDriverSettings {
     protected CoffeePage coffeePage;
-    private List<String> listOfCoffee;
 
     @BeforeClass
     public void init() {
@@ -16,26 +16,21 @@ public class CoffeeTest extends WebDriverSettings {
     }
 
     @Test
+    @Description("Verify coffee list contains the selected option")
     public void containsOptionTest() {
-        coffeePage.clickOnCheckbox(data.getOneOptionContainsListOfCoffee());
-        listOfCoffee = coffeePage.checkListOfItems();
-        for (String listOfWord : listOfCoffee) {
-            Assert.assertTrue(listOfWord.contains(data.getOneOptionContainsListOfCoffee().toLowerCase()), "-- Failed. " +
-                    listOfWord + " doesn't contain word " + data.getOneOptionContainsListOfCoffee().toLowerCase() + " --\n");
-        }
+        coffeePage.clickOnCheckbox(data.getFirstOptionContainsListOfCoffee());
+        Assert.assertTrue(coffeePage.checkListOfItems(data.getFirstOptionContainsListOfCoffee()));
     }
 
     @Test
+    @Description("Verify coffee list contains selected options")
     public void containsOptionsTest() {
-        coffeePage.clickOnCheckbox("В зернах");
-        listOfCoffee = coffeePage.checkListOfItems();
-        for (String listOfWord : listOfCoffee) {
-            Assert.assertTrue(listOfWord.contains(data.getTwoOptionsContainListOfCoffee()), "-- Failed. " +
-                    listOfWord + " doesn't contain words " + data.getTwoOptionsContainListOfCoffee() + " --\n");
-        }
+        coffeePage.clickOnCheckbox(data.getSecondOptionContainsListOfCoffee());
+        Assert.assertTrue(coffeePage.checkListOfItems(data.getTwoOptionsContainListOfCoffee()));
     }
 
     @Test
+    @Description("Verify basket contains the selected product")
     public void containsProductInBasket() {
         coffeePage.clickOnItem();
         coffeePage.clickOnButtonBuy();
@@ -43,4 +38,6 @@ public class CoffeeTest extends WebDriverSettings {
         Assert.assertTrue(coffeePage.isContainsProducts(),
                 "-- Failed. Because basket doesn't contain any products!");
     }
+
 }
+

@@ -1,8 +1,8 @@
 {
   "alcoholTitle": "Алкогольные напитки и продукты",
   "coffeeTitle": "Кофе",
-  "searchLaptop": "ноутбук",
-  "oneOptionContainsListOfLaptops": "Apple",
+  "searchLaptop": "лодка",
+  "oneOptionContainsListOfLaptops": "Bark",
   "userEmail": "body@gmail.com",
   "validUserEmail": "n.mykola@gmail.com",
   "userPassword": "5g6hsm89",
@@ -10,8 +10,10 @@
   "userName": "some",
   "validAuthUserName": "Николай",
   "errorColor": "#ffffff",
-  "oneOptionContainsListOfCoffee": "Ambassador",
-  "twoOptionsContainListOfCoffee": "кофе в зернах ambassador",
+  "firstOptionContainsListOfCoffee": "Ambassador",
+  "secondOptionContainsListOfCoffee": "Молотый",
+  "twoOptionsContainListOfCoffee": "Кофе молотый Ambassador",
   "errorMsgName": "Введите свое имя на кириллице",
   "errorMsgEmail": "Введите свою эл. почту"
 }
+

@@ -1,22 +1,18 @@
 package pages;
 
 import core.WebDriverSettings;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import utils.ElementsUtils;
 
-import java.util.logging.Logger;
 
-
-public class SignUpPage extends AuthorizationPage {
-
-    private String incorrectColor;
-    private Logger log;
+public class SignUpPage extends BasePage {
 
     public SignUpPage() {
         PageFactory.initElements(WebDriverSettings.getDriver(), this);
-        log = Logger.getLogger(CoffeePage.class.getName());
         log.info("** Open SignUp Page **");
     }
 
@@ -38,47 +34,42 @@ public class SignUpPage extends AuthorizationPage {
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='username']//following-sibling::form-error/p")
     private WebElement errorMsgEmail;
 
-
-    public SignUpPage inputUserName(String name) {
+    @Step("Login step with name: {0}, email: {1}, password: {2}")
+    public SignUpPage inputAuthKeys(String name, String email, String password) {
         log.info("Input empty user name: " + name);
         userName.clear();
         userName.sendKeys(name);
-        return this;
-    }
-
-    public SignUpPage inputUserEmail(String email) {
         log.info("Input user email: " + email);
         userEmail.clear();
         userEmail.sendKeys(email);
-        return this;
-    }
-
-    public SignUpPage inputUserPswd(String pswd) {
-        log.info("Input user password: " + pswd);
+        log.info("Input user password: " + password);
         userPassword.clear();
-        userPassword.sendKeys(pswd);
-        return this;
-    }
-
-    public SignUpPage clickToRegistration() {
+        userPassword.sendKeys(password);
         log.info("Click to register");
         registration.click();
         return this;
     }
 
-    public String getIncorrectPasswdField() {
-        return incorrectColor = this.getIncorrectFieldColor(userPassword);
+    @Step("Click on registration button")
+    public void clickToRegistration() {
+        log.info("Click to register");
+        registration.click();
     }
 
+    @Step("Get incorrect color of password field")
+    public String getIncorrectPasswdField() {
+        return ElementsUtils.getIncorrectFieldColor(userPassword);
+    }
+
+    @Step("Get error username message")
     public String getErrorNameMessage() {
         log.info("Checking that error message is correct");
-        String msg = errorMsgName.getText();
-        return msg;
+        return errorMsgName.getText();
     }
 
+    @Step("Get error email message")
     public String getErrorEmailMessage() {
-        String msg = errorMsgEmail.getText();
-        return msg;
+        return errorMsgEmail.getText();
     }
 
 }

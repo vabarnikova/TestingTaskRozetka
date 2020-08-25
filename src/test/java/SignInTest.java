@@ -1,46 +1,47 @@
 import core.WebDriverSettings;
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pages.BasePage;
+import pages.RozetkaPage;
 import pages.SignInPage;
 
+@Feature("SignIn page Tests")
 public class SignInTest extends WebDriverSettings {
     protected SignInPage signInPage;
-    protected BasePage mainPage;
+    protected RozetkaPage mainPage;
 
     @BeforeClass
     public void Initial() {
-        mainPage = new BasePage();
-        signInPage = mainPage.goToSignIn();
+        mainPage = new RozetkaPage();
+        signInPage = mainPage.openSignIn();
     }
 
     @Test
+    @Description("Invalid Login Scenario with empty password")
     public void emptyPasswordTest() {
-        signInPage.inputPassword("");
-        signInPage.inputEmail(data.getUserEmail());
-        signInPage.clickToSubmit();
+        signInPage.inputAuthKeys(data.getUserEmail(), "");
         String color = signInPage.getIncorrectPasswdField();
         Assert.assertTrue(color != data.getErrorColor(), "-- Failed. Because input colour is white -- \n");
     }
 
     @Test
+    @Description("Invalid Login Scenario with empty email")
     public void emptyEmailTest() {
-        signInPage.inputEmail("");
-        signInPage.inputPassword(data.getUserPassword());
-        signInPage.clickToSubmit();
+        signInPage.inputAuthKeys("", data.getUserPassword());
         String color = signInPage.getIncorrectEmailField();
         Assert.assertTrue(color != data.getErrorColor(), "-- Failed. Because input colour is white -- \n");
     }
 
-    @Test(description = "test fails periodically")
+    @Test
+    @Description("Verify authentication was successful")
     public void successfulAuthorization() {
-        signInPage.inputEmail(data.getValidUserEmail());
-        signInPage.inputPassword(data.getValidUserPassword());
-        signInPage.clickToSubmit();
-        signInPage.getAuthorizedUserName(data.getValidAuthUserName());
+        signInPage.inputAuthKeys(data.getValidUserEmail(), data.getValidUserPassword())
+                .formContainsCaptcha();
         String authUserName = signInPage.getAuthorizedUserName(data.getValidAuthUserName());
         Assert.assertEquals(authUserName, data.getValidAuthUserName(), "-- Failed. Because user's name " + authUserName
                 + " isn't equal " + data.getValidAuthUserName() + "  -- \n");
     }
+
 }
