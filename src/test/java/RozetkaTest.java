@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.RozetkaPage;
+import parse.DataProviderClass;
 
 @Feature("Rozetka page Tests")
 public class RozetkaTest extends WebDriverSettings {
@@ -21,6 +22,27 @@ public class RozetkaTest extends WebDriverSettings {
     public void containsWordTest() {
         mainPage.clickRozetkaSearch(data.getSearchLaptop());
         Assert.assertTrue(mainPage.checkListOfItems(data.getSearchLaptop()));
+    }
+
+    public void catalogContainsCategories() {
+        Assert.assertTrue(mainPage.isWebsiteContainsCategory("Ноутбуки и компьютеры",
+                "Бытовая техника", "Спорт и увлечения"));
+    }
+
+    @Test
+    public void categoryContainsSubcategoriesTest() {
+        Assert.assertTrue(mainPage.isCategoryContainsSubcategory("Смартфоны, ТВ и электроника", "Смартфоны"));
+    }
+
+    @Test(dataProvider = "menuCategoriesAndSubcategories", dataProviderClass = DataProviderClass.class)
+    public void categoriesInDataProviderTest(String menuCategory, String menuSubcategory) {
+        Assert.assertTrue(mainPage.isCategoryContainsSubcategory(menuCategory, menuSubcategory));
+    }
+
+    @Test
+    public void selectCategoryTest() {
+        mainPage.selectionCategory("Ноутбуки и компьютеры");
+        mainPage.selectSubcategory("Asus");
     }
 
     @Test
