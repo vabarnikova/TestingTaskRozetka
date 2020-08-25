@@ -4,9 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import parse.DataForTesting;
 import parse.ParsingData;
 
@@ -24,18 +22,22 @@ public class WebDriverSettings {
     @BeforeClass
     @Step("Open url: {0} ")
     @Parameters("navigateTo")
-    public void setUp(String navigateTo) {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    public void navigateToPage(String navigateTo) {
         driver.get(navigateTo);
-        driver.manage().deleteAllCookies();
-        driver.manage().window().maximize();
         parsingData = new ParsingData();
         data = parsingData.dataParse();
     }
 
-    @AfterClass
+    @BeforeTest
+    public void setDriverDetails(){
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().deleteAllCookies();
+        driver.manage().window().maximize();
+    }
+
+    @AfterTest
     @Step("Quit tests")
     public void tearDown() {
         driver.quit();
